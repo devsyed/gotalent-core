@@ -1,0 +1,128 @@
+p.error-form {
+    margin: 0;
+    padding: 0;
+    background: #db8b89;
+    margin-bottom: 20px;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+
+
+button.processing {
+    font-size: 0!important;
+    min-height: 45px;
+    position: relative;
+    margin-top: 20px!important;
+}
+
+button.processing::before {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    position: absolute;
+    left: calc(50% - 20px);
+    top: calc(0% + 10px);
+    border: 2px solid;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: gtrotate .5s infinite linear;
+}
+
+@keyframes gtrotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+
+/** Datatables Styling **/
+.dataTables_wrapper label {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+a.request_withdraw_btn {
+    background: #418595;
+    padding: 10px 30px;
+    color: #fff!important;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+
+p.copy-text {
+    background: #d9d9d978;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    overflow:scroll;
+}
+#calendarFull table th,#calendarFull table td{
+    padding:0!important;
+    width: unset!important;
+}
+#calendarFull table a{
+    background:none!important;
+    padding:0!important;
+    color:#000;
+}
+
+.fc .fc-daygrid-day-frame{
+    padding:20px;
+}
+
+.fc-scrollgrid-sync-inner {
+    text-align: right;
+    padding: 5px 10px;
+}
+div#calendarFull {
+    max-width: 100%;
+    height:750px!important;
+}
+
+.availability-settings > *{
+    flex-basis: 100%;
+    margin:0px 0px 0px 0px;
+}
+
+fieldset.day-single {width: 15%;}
+
+fieldset.day-single label {
+    height: 10px;
+    font-size: 18px;
+}
+
+/** Dropzone Styles **/
+.gt-dropzone {
+    margin: 0px 40px 0px 0px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gt-dropzone p {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #000;
+}
+
+.save-form-wrapper {
+    background: #ffffff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 99;
+    border-top: 1px solid #d9d9d9;
+    box-shadow: 5px 5px 10px #000;
+    right: 0;
+}

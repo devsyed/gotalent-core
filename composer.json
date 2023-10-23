@@ -1,0 +1,21 @@
+{
+    "name": "devsyed/gotalent-core",
+    "autoload": {
+        "psr-4": {
+            "Admin\\":"admin",
+            "Helpers\\":"helpers",
+            "Public\\":"public",
+            "Includes\\":"includes"
+        }
+    },
+    "authors": [
+        {
+            "name": "DevSyed"
+        }
+    ],
+    "require": {
+        "stripe/stripe-php": "^12.4",
+        "vlucas/phpdotenv": "^5.5",
+        "phpmailer/phpmailer": "^6.8"
+    }
+}
