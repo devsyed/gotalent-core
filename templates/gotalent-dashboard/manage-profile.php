@@ -5,7 +5,7 @@ $role = $user->roles[0];
 
 $talent_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categories();
 $talent_categories = wp_list_pluck($talent_categories_obj,'name', 'term_id');
-$talent_categories[0] = 'Select Parent';
+
 
 $profile_image = get_user_meta($user->ID,'profile_image');
 $cover_image = (get_user_meta($user->ID,'talent_cover_image', true)) ? get_user_meta($user->ID,'talent_cover_image', true) :  'https://placehold.co/600x600';
@@ -24,6 +24,7 @@ $talent_selected_category = get_user_meta($user->ID, 'talent_category', true);
 $talent_selected_subcategory = get_user_meta($user->ID, 'talent_sub_category', true);
 $talent_profession = get_user_meta($user->ID,'talent_profession', true);
 $talent_tags = get_user_meta($user->ID,'talent_tags', true);
+$requirements = get_user_meta($user->ID,'requirement_for_performing', true);
 
 $talent_sub_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categories($talent_selected_category);
 $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_id');
@@ -35,9 +36,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
             <div class="col-lg-12 col-md-12 ">
                 <div class="profile-setting bg-white">
                     <div class="author-profile flex2 border-bt">
-                        <input type="hidden" id="profile-image-url" name="_meta_profile_image_url">
-                        <input type="hidden" id="cover-image-url" name="_meta_cover_image_url">
-
+                        
                         <?php
                         echo GTFormHelper::generate_dashboard_form_fields(array(
                             array(
@@ -45,7 +44,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                 'name' => 'profile-image-uploader',
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
-                                'input_id' => 'profile-image-url',
+                                'input_id' => '_meta_profile_image_url',
                                 'message' => 'Upload Profile Image Here'
                             ),
                             array(
@@ -53,7 +52,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                 'name' => 'cover-image-uploader',
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
-                                'input_id' => 'cover-image-url',
+                                'input_id' => '_meta_cover_image_url',
                                 'message' => 'Upload Cover Image Here'
                             ),
                         ))
@@ -208,7 +207,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                         array(
                                             'type' => 'select',
                                             'name' => '_meta_talent_sub_category',
-                                            'label' => 'Select Your Sub Category',
+                                            'label' => 'Select Your Speciality',
                                             'required' => false,
                                             'onchange' => 'gt_get_subcategories',
                                             'options' => $talent_sub_categories,
@@ -225,7 +224,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                     array(
                                         'type' => 'multiselect', 
                                         'name' => '_meta_talent_tags',
-                                        'label' => 'Type Your Skills',
+                                        'label' => 'Skill Tags',
                                         'required' => true,
                                         'value' => $hourly_rate,
                                         'options' => $talent_tags,
@@ -251,6 +250,22 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                     )
                                 ))
                             ?>
+                        </div>
+                        <div class="gt-form-row">
+                            <?php
+                                GTFormHelper::generate_dashboard_form_fields(
+                                    array(
+                                        array(
+                                            'type' => 'textarea',
+                                            'name' => '_meta_requirement_for_performing',
+                                            'label' => 'State Your Requirements to Perform',
+                                            'required' => false,
+                                            'value' => $requirements,
+    
+                                        ),
+                                ));
+                            ?>
+
                         </div>
 
                     </div>

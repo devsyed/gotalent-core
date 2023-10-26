@@ -50,11 +50,10 @@ class GTUserHandler{
     /** 
      * Upload Images for User
      */
-    public static function gt_user_handle_images($user_id, $files, $image_id)
+    public static function gt_user_handle_images($user_id, $files, $image_id, $directory = '')
     {
-        $links = GTFormHelper::save_files($files);
-        update_user_meta($user_id, $image_id,$links);
-        return true;
+        $links = GTFormHelper::save_files($files,$directory);
+        return $links;
     }
 
 }

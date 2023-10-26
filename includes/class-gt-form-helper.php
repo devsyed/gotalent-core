@@ -90,9 +90,14 @@ class GTFormHelper
                 }
     
                 switch ($type) {
+                    case 'hidden':
+                        echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . ' value="'.$value.'">
+                        ';
+                        break;
                     case 'text':
                     case 'password':
                     case 'email':
+                    
                     case 'number':
                         echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . ' value="'.$value.'">
                         <p class="info-field">'.$info.'</p>
@@ -167,8 +172,8 @@ class GTFormHelper
                             echo '<option value="' . strtolower($option_label) . '" '.$selected.' selected="selected">' . ucfirst($option_label) . '</option>';
                             }
                             echo '</select>';
-                        break;
                         }
+                        break;
 
                     default:
                         // Handle unsupported field types
@@ -184,23 +189,29 @@ class GTFormHelper
     public static function save_files($files, $directory = '')
     {
 
-        $base_dir = ($directory !== '') ?  wp_get_upload_dir()['basedir'] : wp_get_upload_dir()['basedir'] . $directory;
-        $base_url = ($directory !== '') ?  wp_get_upload_dir()['baseurl'] : wp_get_upload_dir()['baseurl'] . $directory;
+        $upload_dir = wp_get_upload_dir();
+        $base_dir = ($directory !== '') ? $upload_dir['basedir'] . '/' . $directory : $upload_dir['basedir'];
+        $base_url = ($directory !== '') ? $upload_dir['baseurl'] . '/' . $directory : $upload_dir['baseurl'];
+        
         $files = $_FILES;
-        $attachment_links = []; 
-
+        $attachment_links = [];
+        
         foreach ($files as $file) {
             $file_name = $file['name'];
             $unique_string = md5(time() . $file_name);
             $file_type = wp_check_filetype($file_name);
             $tmp_name = $file['tmp_name'];
             $file_mime_type = $file['type'];
-            move_uploaded_file($tmp_name, $base_dir . '/' . $unique_string . '.' . $file_type['ext']);
+        
+            $destination = $base_dir . '/' . $unique_string . '.' . $file_type['ext'];
+            move_uploaded_file($tmp_name, $destination);
+        
             $image_link = $base_url . '/' . $unique_string . '.' . $file_type['ext'];
             $attachment_links[] = $image_link;
         }
-
+        
         return $attachment_links;
+        
     }
     
     

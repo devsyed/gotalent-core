@@ -13,8 +13,6 @@ class GTHooks
         /** After Registration Hook */
         add_action('user_register', array(__CLASS__, 'gt_send_email_new_account'), 10,1 );
         add_action('user_register', array(__CLASS__, 'gt_create_user_specific_folder'), 20,1 );
-
-      
     }
 
 
@@ -23,11 +21,20 @@ class GTHooks
      */
     public static function gt_create_user_specific_folder($user_id)
     {
-        $random_string = md5($user_id,'user_files');
-        if ( ! is_dir( ABSPATH . '/wp-content/uploads/' . $random_string) ) {
-            update_user_meta($user_id,'secure_folder_name', $random_string);
-            wp_mkdir_p( ABSPATH . '/wp-content/uploads/'  . $random_string);
+        $folder_exists = get_user_meta($user_id, 'secure_folder_name', true);
+        if (!$folder_exists) {
+            $random_string = md5($user_id . 'user_files' . uniqid());
+            $folder_path = ABSPATH . '/wp-content/uploads/' . $random_string;
+
+            if (!is_dir($folder_path)) {
+                if (wp_mkdir_p($folder_path)) {
+                    update_user_meta($user_id, 'secure_folder_name', $random_string);
+                    return true;
+                }
+            }
         }
+        return $folder_exists;
+
     }
 
 
@@ -51,6 +58,7 @@ class GTHooks
         }
         return $mail;
     }
+
 
 }
 

@@ -47,6 +47,14 @@ class GTTemplateLoader
                 'allowed_capabilities' => array('can_manage_talent_categories'),
                 'add_new_page' => 'gotalent-dashboard/talent-categories/add',
                 'single_page' => 'gotalent-dashboard/talent-categories/single',
+            ),
+            'gotalent-dashboard/manage-packages' => array(
+                'allowed_capabilities' => array('can_be_hired'),
+                'add_new_page' => 'gotalent-dashboard/packages/add',
+                'single_page' => 'gotalent-dashboard/packages/single'
+            ),
+            'gotalent-dashboard/manage-portfolio' => array(
+                'allowed_capabilities' => array('can_be_hired'),
             )
         );
         return apply_filters('gt_allowed_endpoints', $endpoints);

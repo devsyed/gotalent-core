@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 
 class GTAjaxHandler
 {
-    public static $ajax_actions = ['gotalent_authenticate_login','gotalent_authenticate_register', 'gotalent_generate_payment_link','gotalent_talent_categories_add_new','gotalent_get_talent_subcategories', 'gotalent_user_process_meta','gt_upload_images','gotalent_availabilities_update_days'];
+    public static $ajax_actions = ['gotalent_authenticate_login','gotalent_authenticate_register', 'gotalent_generate_payment_link','gotalent_talent_categories_add_new','gotalent_get_talent_subcategories', 'gotalent_user_process_meta','gt_upload_images','gotalent_availabilities_update_days','gotalent_packages_add_package','gotalent_talent_add_portfolio'];
 
     public static function load_all_ajax_scripts()
     {
@@ -204,8 +204,8 @@ class GTAjaxHandler
     {
         $image_id = $_REQUEST['id'];
         try{
-            GTUserHandler::gt_user_handle_images(get_current_user_id(),$_FILES,$image_id);
-            self::send_ajax_success('Uploaded and set Successfully.');
+            $link = GTUserHandler::gt_user_handle_images(get_current_user_id(),$_FILES,$image_id);
+            self::send_ajax_success($link);
         }catch(Error $err){
             self::send_ajax_error(new WP_Error('internal_error', $err->getMessage()));
         }
@@ -220,6 +220,49 @@ class GTAjaxHandler
         parse_str($_POST['formData'],$data);
         $availabilities_updated = GTUserHandler::gt_process_user_meta(get_current_user_id(),$data);
         self::send_ajax_success($availabilities_updated);
+    }
+
+
+    /** 
+     * Add Package for Talent
+     * 
+     */
+    public static function gotalent_packages_add_package()
+    {
+        try{
+            parse_str($_POST['formData'], $data);
+            $package_create = GTPackagePostType::create_package(get_current_user_id(),$data);
+            if (is_wp_error($package_create)) {
+                self::send_ajax_error($package_create);
+            }
+            self::send_ajax_success($package_create);
+
+        }
+        catch (Error $err) {
+            self::send_ajax_error(new WP_Error('internal_error', $err->getMessage()));
+        }
+    }
+
+
+    /** 
+     * Add Portfolio
+     */
+    public static function gotalent_talent_add_portfolio()
+    {
+        $pieces = explode("&", $_POST['formData']);
+        $result = array();
+        foreach ($pieces as $piece) {
+            $pair = explode("=", $piece);
+            $key = urldecode($pair[0]);
+            $value = urldecode($pair[1]);
+
+            if (!isset($result[$key])) {
+                $result[$key] = array();
+            }
+
+            $result[$key][] = $value;
+        }
+        update_user_meta(get_current_user_id(), 'portfolio_links', $result['_meta_portfolio_links']);
     }
 }
 

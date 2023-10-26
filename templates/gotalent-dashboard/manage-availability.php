@@ -22,7 +22,7 @@ $available_days = get_user_meta(get_current_user_id(), 'available_days', true);
 
                     <div class="available-days-set">
                         <h3><?php echo __('Set Your Available Days', 'gotalent-core'); ?></h3>
-                        <form action="gotalent/availabilities/update_days" class="gt-form" method="POST"
+                        <form action="gotalent/availabilities/update_days" class="mt-5 gt-form" method="POST"
                             data-redirect-url="/manage-availability">
                             <div class="available-days">
                                 <?php 

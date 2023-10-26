@@ -56,6 +56,7 @@ final class GoTalent {
         require_once GOTALENT_PLUGIN_PATH . '/includes/post-types/class-post-type-recruiter.php';
         require_once GOTALENT_PLUGIN_PATH . '/includes/post-types/class-post-type-invitation.php';
         require_once GOTALENT_PLUGIN_PATH . '/includes/post-types/class-post-type-booking.php';
+        require_once GOTALENT_PLUGIN_PATH . '/includes/post-types/class-post-type-packages.php';
 
         /** Taxonomy | GoTalent */
         require_once GOTALENT_PLUGIN_PATH . '/includes/taxonomies/class-taxonomy-talent-categories.php';
@@ -69,6 +70,11 @@ final class GoTalent {
         /** User Functions */
         require_once GOTALENT_PLUGIN_PATH . '/includes/authentication/class-gt-authentication.php';
         require_once GOTALENT_PLUGIN_PATH . '/includes/class-gt-user-handler.php';
+        
+        
+        /** Shortcode Handler */
+        require_once GOTALENT_PLUGIN_PATH . '/includes/class-gt-shortcode-handler.php';
+
 
 
         /** API Handler */
@@ -117,6 +123,7 @@ final class GoTalent {
         wp_enqueue_script('dropzone-js',GOTALENT_PUBLIC_ASSETS . '/dropzone.js', array(), '1.0', true );
         wp_enqueue_script('fullcalendar-js',GOTALENT_PUBLIC_ASSETS . '/fullcalendar.js', array(), '1.0', true );
         wp_enqueue_script('select2-js',GOTALENT_PUBLIC_ASSETS . '/select2.js', array(), '1.0', true );
+        wp_enqueue_script('sweetalert-js',GOTALENT_PUBLIC_ASSETS . '/sweetalert.js', array(), '1.0', true );
         wp_enqueue_script('gt-core-js',GOTALENT_PUBLIC_ASSETS . '/core.js', array('jquery','wp-tinymce','dropzone-js'), '1.0', true );
 
 

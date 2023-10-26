@@ -55,7 +55,7 @@ class GTTalentPostType {
 			'query_var'           => true,
 			'rewrite'             => array('slug' => 'talent'), // Customize the URL slug
 			'capability_type'     => 'post',
-			'has_archive'         => false, // Set to true if you want an archive page
+			'has_archive'         => true,
 			'hierarchical'        => false,
 			'menu_position'       => null,
 			'menu_icon' 		  => 'dashicons-universal-access-alt',
@@ -88,11 +88,12 @@ class GTTalentPostType {
 				'relation' => 'OR',
 				array(
 					'key'     => 'verified',
-					'value'   => true,
 					'compare' => 'EXISTS'
 				),
 			)
 		));
+		$results = $verified_talent->get_results();
+		return $results;
 	}
 
 

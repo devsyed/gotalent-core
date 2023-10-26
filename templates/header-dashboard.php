@@ -58,7 +58,7 @@ $title = ($page_title !== '') ? ucwords($page_title) : 'Dashboard';
                 do_action('gt_dashboard_sidebar_links');
              ?>
             <li>
-                <a href="<?php echo wp_logout_url() ?>" class="tf-effect">
+                <a id="logout_btn" href="<?php echo wp_logout_url() ?>" class="tf-effect">
                     <span class="dash-titles"><?php echo __('Log Out','gotalent-core'); ?></span>
                 </a>
             </li>

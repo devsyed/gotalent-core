@@ -1,18 +1,26 @@
 
 Dropzone.autoDiscover = false;
 jQuery(document).ready(function($){
-    
-    /** Handle Dropzone and File Uploads through Dropzone.js */
+    let dropzone; 
     $(".gt-dropzone").each(function(index,val){
-        new Dropzone(val, { 
+        var maxFilesAllowed = $(val).data('max-upload');
+        var inputId = $(val).data('input-id');
+        dropzone = new Dropzone(val, { 
             url: gotalent_ajax.ajax_url + '?action=' + $(val).attr('action') + '&id=' +  $(val).data('input-id'),
             acceptedFiles:"image/*,.png,.jpeg,.jpg",
-            maxFiles: 1,
-            autoProcessQueue:false,
+            maxFiles: maxFilesAllowed,
+            autoProcessQueue:true,
             addRemoveLinks:true,
+            parallelUploads:10,
             success:function(files,response){
-                var inputId = $(val).data('input-id');
-                $(`#${inputId}`).val(response.data.message)
+               $(files).each(function(index,value){
+                    var inputField = document.createElement('input');
+                    inputField.setAttribute('type', 'hidden');
+                    inputField.setAttribute('name', inputId);
+                    inputField.value = response.data.message;
+                    $("form").append(inputField);
+                    
+               })
             },
         });
     })
@@ -49,12 +57,6 @@ jQuery(document).ready(function($){
         setLoader(button);
         var action = makeActionNameReady($(this).attr('action'));
         var redirectUrl = $(this).data('redirect-url');
-        // if (typeof Dropzone !== "undefined") {
-        //     var dropzones = Dropzone.forElement(".gt-dropzone");
-        //     if (dropzones) {
-        //         dropzones.processQueue();
-        //     }
-        // }
         $.ajax({
             method:method,
             url:gotalent_ajax.ajax_url,
@@ -77,9 +79,9 @@ jQuery(document).ready(function($){
                         window[successCallback](res.data.message); 
                     
                     }else {
-                    if (redirectUrl) {
-                        handleRedirect(redirectUrl);
-                    }
+                    // if (redirectUrl) {
+                    //     handleRedirect(redirectUrl);
+                    // }
                 }
                 }
 
@@ -171,8 +173,41 @@ jQuery(document).ready(function($){
 
 
 
+    $("#logout_btn").on("click", function(e){
+        e.preventDefault();
+        var _this = this;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Logout'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location = $(_this).attr('href');
+            }
+        })
+    })
+
+
     
 
+    $(document).on("click", ".remove_portfolio_item", function(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This Portfolio Item will be deleted permanently.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Delete'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).parent().remove();
+            }
+        })
+    })
 
     
     
