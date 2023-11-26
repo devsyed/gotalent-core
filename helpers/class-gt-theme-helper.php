@@ -23,9 +23,15 @@ class GTThemeHelper
 
 
          /** Talent Archive Page */
-         add_action('gt_talent_page_archive', array(__CLASS__,'gt_talent_page_archive_breadcrumb'),10);
          add_action('gt_talent_page_archive', array(__CLASS__,'gt_talent_page_archive_filters'),20);
          add_action('gt_talent_page_archive', array(__CLASS__,'gt_talent_page_archive_listing'),30);
+
+
+         /** Talent Author Page */
+         add_action('gt_talent_packages', array(__CLASS__,'gt_talent_show_packages'),10,1);
+
+         /** Talent Veritifcation Notice | Header */
+         add_action('wp_head', array(__CLASS__,'gt_show_verification_alert'));
 
 
     
@@ -102,32 +108,37 @@ class GTThemeHelper
 
     /** 
      * @todo - Change Detection of links from role to capabilities in future. 
+     * @todo - Combine this and Template Include together, load these pages from .env file so pages
+     * can be created with just single change.
      * 
      */
     public static function gt_dashboard_sidebar_links()
     {
         $sidebar_links = [
             'gotalent-dashboard/manage-profile' => __('Manage Profile', 'gotalent-core'),
-            'gotalent-dashboard/manage-payment-settings' => __('Payment Settings', 'gotalent-core'),
-            'gotalent-dashboard/earnings' => __('Earnings', 'gotalent-core'),
+            'gotalent-dashboard/manage-invitations' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/manage-bookings' => __('Manage Bookings', 'gotalent-core'),
+            'gotalent-dashboard/invitations-sent' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/manage-availability' => __('Manage Availability', 'gotalent-core'),
-            'gotalent-dashboard/notifications' => __('Notifications', 'gotalent-core'),
-            'gotalent-dashboard/messages' => __('Messages', 'gotalent-core'),
             'gotalent-dashboard/manage-recruiters' => __('Manage Recruiters', 'gotalent-core'),
             'gotalent-dashboard/manage-talent' => __('Manage Talent', 'gotalent-core'),
-            'gotalent-dashboard/site-settings' => __('Settings', 'gotalent-core'),
             'gotalent-dashboard/manage-talent-categories' => __('Talent Categories', 'gotalent-core'),
-            'gotalent-dashboard/manage-verification-settings' => __('Vertification Settings', 'gotalent-core'),
             'gotalent-dashboard/manage-packages' => __('Packages', 'gotalent-core'),
+            'gotalent-dashboard/manage-portfolio' => __('Manage Portfolio', 'gotalent-core'),
+            'gotalent-dashboard/manage-verification-settings' => __('Vertification Settings', 'gotalent-core'),
+            'gotalent-dashboard/manage-payment-settings' => __('Payment Settings', 'gotalent-core'),
+            'gotalent-dashboard/earnings' => __('Earnings', 'gotalent-core'),
+            'gotalent-dashboard/notifications' => __('Notifications', 'gotalent-core'),
+            'gotalent-dashboard/messages' => __('Messages', 'gotalent-core'),
+            'gotalent-dashboard/site-settings' => __('Settings', 'gotalent-core'),
             'gotalent-dashboard/pending-talent-verification' => __('Pending Talent Verification', 'gotalent-core'),
-            'gotalent-dashboard/manage-portfolio' => __('Manage Portfolio', 'gotalent-core')
         ];
 
         $role = wp_get_current_user()->roles[0];
         switch ($role) {
             case 'recruiter':
                 unset($sidebar_links['gotalent-dashboard/manage-availability']);
+                unset($sidebar_links['gotalent-dashboard/manage-profile']);
                 unset($sidebar_links['gotalent-dashboard/manage-recruiters']);
                 unset($sidebar_links['gotalent-dashboard/manage-talent']);
                 unset($sidebar_links['gotalent-dashboard/site-settings']);
@@ -136,7 +147,9 @@ class GTThemeHelper
                 unset($sidebar_links['gotalent-dashboard/manage-verification-settings']);
                 unset($sidebar_links['gotalent-dashboard/pending-talent-verification']);
                 unset($sidebar_links['gotalent-dashboard/manage-packages']);
+                unset($sidebar_links['gotalent-dashboard/earnings']);
                 unset($sidebar_links['gotalent-dashboard/manage-portfolio']);
+                unset($sidebar_links['gotalent-dashboard/manage-invitations']);
                 
                 break;
                 case 'talent':
@@ -145,6 +158,7 @@ class GTThemeHelper
                     unset($sidebar_links['gotalent-dashboard/manage-talent-categories']);
                     unset($sidebar_links['gotalent-dashboard/site-settings']);
                     unset($sidebar_links['gotalent-dashboard/pending-talent-verification']);
+                    unset($sidebar_links['gotalent-dashboard/invitations-sent']);
                     if(get_user_meta(get_current_user_id(), 'verified', true)){
                         unset($sidebar_links['gotalent-dashboard/manage-verification-settings']);
                     }
@@ -158,6 +172,8 @@ class GTThemeHelper
                     unset($sidebar_links['gotalent-dashboard/manage-profile']);
                     unset($sidebar_links['gotalent-dashboard/manage-packages']);
                     unset($sidebar_links['gotalent-dashboard/manage-portfolio']);
+                    unset($sidebar_links['gotalent-dashboard/manage-invitations']);
+                    unset($sidebar_links['gotalent-dashboard/invitations-sent']);
                     
                     break;
         }
@@ -183,9 +199,9 @@ class GTThemeHelper
      * Priority: 10 
      * Description: Show BreadCrumb
      */
-    public static function gt_talent_page_archive_breadcrumb()
+    public static function show_breadcrumb($title, $subtitle)
     {
-        GTHelpers::gt_get_template_part('breadcrumb.php');
+        GTHelpers::gt_get_template_part('breadcrumb.php',array('title' => $title,'subtitle' => $subtitle));
     }
     
     
@@ -208,6 +224,29 @@ class GTThemeHelper
     public static function gt_talent_page_archive_listing()
     {
         GTHelpers::gt_get_template_part('talent-listing.php');
+    }
+
+
+
+    /** 
+     * gt_talent_show_packages
+     */
+    public static function gt_talent_show_packages($talent_id)
+    {
+        $packages = GTPackagePostType::gt_get_all_talent_packages($talent_id);
+        GTHelpers::gt_get_template_part('talent-packages.php', $packages);
+    }
+
+
+    /** 
+     * 
+     */
+    public static function gt_show_verification_alert()
+    {
+        $user = wp_get_current_user();
+        if(!get_user_meta($user->ID, 'verified', true) && current_user_can('can_be_hired')){
+            GTHelpers::gt_get_template_part('talent-verification-notice-header.php',[]);
+        }
     }
 
     

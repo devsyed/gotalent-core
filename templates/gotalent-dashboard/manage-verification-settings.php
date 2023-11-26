@@ -1,43 +1,47 @@
-<?php GTThemeHelper::gt_get_header('header-dashboard'); ?>
-<section class="flat-dashboard-setting">
+<?php GTThemeHelper::gt_get_header('header-dashboard'); 
+
+?>
+<section class="flat-dashboard-setting <?php echo (get_user_meta(get_current_user_id(), 'uploaded_documents', true)) ? 'already-submitted-documents' : '' ?>">
     <div class="themes-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 ">
                 <div class="profile-setting bg-white">
                     <div class="d-flex align-items-center justify-content-between">
-                    <div class="wrap-img d-flex flex-column mb-3">
-                        <div class="img-box relative me-4">
-                            <img src="https://placehold.co/600x400" alt="">
-                        </div>
-                        <div id="upload-profile2">
-                            <h5 class="fw-6">Emirates ID</h5>
-                            <h6>JPG 1920x460px</h6>
-                            <input class="up-file" id="tf-upload-img2" type="file" name="profile">
-
-                        </div>
+                    <form class="gt-form row" data-redirect-url="/gotalent-dashboard/manage-profile" method="POST" action="gotalent/user/process_meta" enctype="multipart/form-data">
+                    <div class="gt-form-row">
+                    <?php
+                        echo GTFormHelper::generate_dashboard_form_fields(array(
+                            array(
+                                'type' => 'file',
+                                'name' => 'profile-image-uploader',
+                                'action' => 'gt_upload_images',
+                                'max_upload' => 1,
+                                'input_id' => '_meta_proof_one',
+                                'message' => 'Verification 1'
+                            ),
+                            array(
+                                'type' => 'file',
+                                'name' => 'cover-image-uploader',
+                                'action' => 'gt_upload_images',
+                                'max_upload' => 1,
+                                'input_id' => '_meta_proof_two',
+                                'message' => 'Verification 2'
+                            ),
+                            array(
+                                'type' => 'file',
+                                'name' => 'cover-image-uploader',
+                                'action' => 'gt_upload_images',
+                                'max_upload' => 1,
+                                'input_id' => '_meta_proof_three',
+                                'message' => 'Verification 3'
+                            ),
+                        ))
+                    ?>
                     </div>
-                    <div class="wrap-img d-flex flex-column mb-3">
-                        <div class="img-box relative me-4">
-                            <img src="https://placehold.co/600x400" alt="">
-                        </div>
-                        <div id="upload-profile2">
-                            <h5 class="fw-6">Driving License</h5>
-                            <h6>JPG 1920x460px</h6>
-                            <input class="up-file" id="tf-upload-img2" type="file" name="profile">
-
-                        </div>
+                    <div class="save-form-wrapper">
+                        <button type="submit" class="ms-3 btn-gt-default"><?php echo __('Upload Documents', 'gotalent-core'); ?></button>
                     </div>
-                    <div class="wrap-img d-flex flex-column mb-3">
-                        <div class="img-box relative me-4">
-                            <img src="https://placehold.co/600x400" alt="">
-                        </div>
-                        <div id="upload-profile2">
-                            <h5 class="fw-6">Selfie with your ID in hand</h5>
-                            <h6>JPG 1920x460px</h6>
-                            <input class="up-file" id="tf-upload-img2" type="file" name="profile">
-
-                        </div>
-                    </div>
+                    </form>
                     </div>
                 </div>
             </div>

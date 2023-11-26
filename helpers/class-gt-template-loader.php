@@ -53,8 +53,16 @@ class GTTemplateLoader
                 'add_new_page' => 'gotalent-dashboard/packages/add',
                 'single_page' => 'gotalent-dashboard/packages/single'
             ),
+            'gotalent-dashboard/manage-invitations' => array(
+                'allowed_capabilities' => array('can_be_hired'),
+                'single_page' => 'gotalent-dashboard/invitations/single'
+            ),
             'gotalent-dashboard/manage-portfolio' => array(
                 'allowed_capabilities' => array('can_be_hired'),
+            ),
+            'buy-package' => array(
+                'single_page' => 'buy-package',
+                'requires_authentication' => false,
             )
         );
         return apply_filters('gt_allowed_endpoints', $endpoints);
@@ -62,8 +70,9 @@ class GTTemplateLoader
 
     public static function gt_template_include($template)
     {
-        global $wp;
+        global $wp, $wp_query;
         $current_page = $wp->request;
+        $wp_query->is_404 = false;
         $user = wp_get_current_user();
         $all_endpoints = self::gt_prepare_endpoints();
 
@@ -95,16 +104,15 @@ class GTTemplateLoader
             }
         }
 
-        if(isset($_GET['query_id'])){
+        if (isset($_GET['query_id'])) {
             $template = GTHelpers::gt_get_template_part($endpoint['single_page'] . '.php');
             return $template;
         }
 
-        if(isset($_GET['add_new'])){
+        if (isset($_GET['add_new'])) {
             $template = GTHelpers::gt_get_template_part($endpoint['add_new_page'] . '.php');
             return $template;
         }
-
 
         if (isset($endpoint['template_url'])) {
             $template = GTHelpers::gt_get_template_part($endpoint['template_url']);
@@ -112,6 +120,8 @@ class GTTemplateLoader
             $template = GTHelpers::gt_get_template_part($current_page . '.php');
         }
 
+
+        status_header(200);
 
         return $template;
     }

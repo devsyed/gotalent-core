@@ -1,17 +1,21 @@
-<?php GTThemeHelper::gt_get_header('header-dashboard'); ?>
+<?php GTThemeHelper::gt_get_header('header-dashboard');
+$total_earned = GTBookingPostType::gt_get_earnings_for_user();
+$total_bookings_query = GTBookingPostType::gt_get_all_bookings();
+$total_bookings_count = $total_bookings_query->found_posts;
+?>
 <section class="flat-dashboard-setting">
     <div class="themes-container">
         <div class="row mb-3">
             <div class="col-lg-3">
                 <div class="single-stat-box d-flex flex-column">
                     <p class="mb-1">Total Earnings</p>
-                    <div>AED 0</div>
+                    <div>AED <?php echo floatval($total_earned); ?></div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="single-stat-box d-flex flex-column">
                     <p class="mb-1">Total Bookings</p>
-                    <div>0</div>
+                    <div><?php echo $total_bookings_count; ?></div>
                 </div>
             </div>
             <div class="col-lg-3">

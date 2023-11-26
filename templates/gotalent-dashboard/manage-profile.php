@@ -7,8 +7,8 @@ $talent_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categorie
 $talent_categories = wp_list_pluck($talent_categories_obj,'name', 'term_id');
 
 
-$profile_image = get_user_meta($user->ID,'profile_image');
-$cover_image = (get_user_meta($user->ID,'talent_cover_image', true)) ? get_user_meta($user->ID,'talent_cover_image', true) :  'https://placehold.co/600x600';
+$profile_image = get_user_meta($user->ID,'profile_image_url',true);
+$cover_image = get_user_meta($user->ID,'cover_image_url', true);
 $description = get_user_meta($user->ID, 'bio_description', true);
 $phone_number = get_user_meta($user->ID,'phone_number', true);
 $alternate_phone_number = get_user_meta($user->ID,'alternate_phone_number', true);
@@ -35,8 +35,8 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
         <form class="gt-form row" data-redirect-url="/gotalent-dashboard/manage-profile" method="POST" action="gotalent/user/process_meta" enctype="multipart/form-data">
             <div class="col-lg-12 col-md-12 ">
                 <div class="profile-setting bg-white">
+                    
                     <div class="author-profile flex2 border-bt">
-                        
                         <?php
                         echo GTFormHelper::generate_dashboard_form_fields(array(
                             array(
@@ -45,7 +45,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
                                 'input_id' => '_meta_profile_image_url',
-                                'message' => 'Upload Profile Image Here'
+                                'message' => 'Profile Image'
                             ),
                             array(
                                 'type' => 'file',
@@ -143,34 +143,34 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                 <div class="form-box info-wd wg-box">
                                     <fieldset class="flex2">
                                         <span class="icon-facebook"></span>
-                                        <input name="_meta_facebook_profile" type="url" class="input-form"
+                                        <input name="_meta_facebook_profile" type="text" class="input-form"
                                             value="<?php echo $facebook_profile; ?>">
                                     </fieldset>
                                     <fieldset class="flex2">
                                         <span class="icon-twitter"></span>
-                                        <input name="_meta_twitter_profile" type="url" class="input-form2"
+                                        <input name="_meta_twitter_profile" type="text" class="input-form2"
                                             placeholder="URL" value="<?php echo $twitter_profile; ?>">
                                     </fieldset>
                                     <fieldset class="flex2">
                                         <span class="icon-instagram1"></span>
-                                        <input name="_meta_instagram_profile" type="url" class="input-form2"
+                                        <input name="_meta_instagram_profile" type="text" class="input-form2"
                                             placeholder="URL" value="<?php echo $instagram_profile; ?>">
                                     </fieldset>
                                 </div>
                                 <div class="form-box info-wd wg-box">
                                     <fieldset class="flex2">
                                         <span class="icon-linkedin2"></span>
-                                        <input name="_meta_linkedin_profile" type="url" class="input-form2"
+                                        <input name="_meta_linkedin_profile" type="text" class="input-form2"
                                             placeholder="URL" value="<?php echo $linkedin_profile; ?>">
                                     </fieldset>
                                     <fieldset class="flex2">
                                         <span class="icon-pinterest"></span>
-                                        <input name="_meta_pinterest_profile" type="url" class="input-form2"
+                                        <input name="_meta_pinterest_profile" type="text" class="input-form2"
                                             placeholder="URL" value="<?php echo $pinterest_profile; ?>">
                                     </fieldset>
                                     <fieldset class="flex2">
                                         <span class="icon-youtube"></span>
-                                        <input name="_meta_youtube_profile" type="url" class="input-form2"
+                                        <input name="_meta_youtube_profile" type="text" class="input-form2"
                                             placeholder="URL" value="<?php echo $youtube_profile; ?>">
                                     </fieldset>
 
@@ -230,15 +230,7 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                         'options' => $talent_tags,
                                         'value' => $talent_selected_subcategory,
                                     ),
-                                    array(
-                                        'type' => 'number', 
-                                        'name' => '_meta_per_hour_rate',
-                                        'label' => 'Your Per Hour Rate',
-                                        'required' => true,
-                                        'max' => 10000,
-                                        'step' => 100,
-                                        'value' => $hourly_rate,
-                                    ),
+                                    
                                     array(
                                         'type' => 'checkbox',
                                         'name' => '_meta_accept_custom_offers',
@@ -274,7 +266,8 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
 
             </div>
             <div class="save-form-wrapper">
-                <button type="submit" class="btn-gt-default"><?php echo __('Save Profile Settings', 'gotalent-core'); ?></button>
+                <a href="/author/<?php echo $user->user_nicename; ?>"><?php echo __('View Your Profile', 'gotalent-core'); ?></a>
+                <button type="submit" class="ms-3 btn-gt-default"><?php echo __('Save Profile Settings', 'gotalent-core'); ?></button>
             </div>
         </form>
     </div>

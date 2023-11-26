@@ -4,7 +4,23 @@ defined('ABSPATH') || exit;
 
 class GTAjaxHandler
 {
-    public static $ajax_actions = ['gotalent_authenticate_login','gotalent_authenticate_register', 'gotalent_generate_payment_link','gotalent_talent_categories_add_new','gotalent_get_talent_subcategories', 'gotalent_user_process_meta','gt_upload_images','gotalent_availabilities_update_days','gotalent_packages_add_package','gotalent_talent_add_portfolio'];
+    public static $ajax_actions = [
+        'gotalent_authenticate_login',
+        'gotalent_authenticate_register', 
+        'gotalent_generate_payment_link',
+        'gotalent_talent_categories_add_new',
+        'gotalent_get_talent_subcategories',
+        'gotalent_user_process_meta',
+        'gt_upload_images',
+        'gotalent_availabilities_update_days',
+        'gotalent_packages_add_package',
+        'gotalent_talent_add_portfolio',
+        'gotalent_store_package_session',
+        'gotalent_create_invitation',
+        'gotalent_accept_invitation',
+        'gotalent_talent_approve_talent'
+
+    ];
 
     public static function load_all_ajax_scripts()
     {
@@ -263,6 +279,66 @@ class GTAjaxHandler
             $result[$key][] = $value;
         }
         update_user_meta(get_current_user_id(), 'portfolio_links', $result['_meta_portfolio_links']);
+    }
+
+    /** 
+     * Store User Package 
+     * 
+     */
+    public static function gotalent_store_package_session()
+    {
+        try{
+            parse_str($_POST['session'],$session);
+            set_transient(get_current_user_id() . '_package_purchase_session', $session);
+            self::send_ajax_success('Session Stored Successfully.');
+        }
+        catch(Error $er){
+            self::send_ajax_error($er);
+        }
+    }
+
+
+    public static function gotalent_create_invitation()
+    {
+        try{
+            parse_str($_POST['formData'],$data);
+            $title = 'Booking Request ';
+            $invitation_created = GTInvitationPostType::gt_create_invitation_request($title,$data);
+            if (is_wp_error($invitation_created)) {
+                self::send_ajax_error($invitation_created);
+            }
+            self::send_ajax_success($invitation_created);
+        }
+        catch(Error $er){
+            self::send_ajax_error($er);
+        }
+    }
+
+
+    public static function gotalent_accept_invitation()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            $accept_invite = GTInvitationPostType::gt_accept_invitation_request($data['invitation_id']);
+            self::send_ajax_success($accept_invite);
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
+
+    }
+
+
+    public static function gotalent_talent_approve_talent()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            $approve_talent = GTTalentPostType::gt_verify_talent($data['talent_id']);
+            if($approve_talent){
+                self::send_ajax_success('Talent Approved');
+            }
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
     }
 }
 

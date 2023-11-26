@@ -32,6 +32,7 @@ class GTUserHandler{
      */
     public static function gt_update_user_data($user_id, $data)
     {
+        if(empty($data)) return;
         $user_data = array(
             'ID' => $user_id, 
             'user_email' => $data['email_address'],

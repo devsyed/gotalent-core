@@ -84,21 +84,21 @@ class GTBookingPostType
 	{
 		$booking_data = array(
 			'post_title' => $title,
-			'post_content' => $content,
 			'post_type' => 'booking',
+			'post_status' => 'private',
 		);
 
 		$booking_id = wp_insert_post($booking_data);
+		do_action('gt_booking_created',$meta['talent_id'], $booking_id, $meta['recruiter_id']);
 
 		if ($booking_id && !is_wp_error($booking_id)) {
-			// If you have custom metadata to save, you can do it here
-			foreach ($meta as $key => $value) {
-				update_post_meta($booking_id, $key, $value);
+			if(!empty($meta)){
+				foreach ($meta as $key => $value) {
+					update_post_meta($booking_id, $key, $value);
+				}
 			}
-			return $booking_id;
-		} else {
-			return false;
-		}
+		} 
+		return $booking_id;
 	}
 
 	public static function gt_delete_booking($booking_id)
@@ -128,9 +128,19 @@ class GTBookingPostType
 		}
 	}
 
-	public static function get_all_bookings_for_talent()
+	public static function get_all_bookings_for_talent($talent_id)
 	{
-		
+		$args = array(
+			'post_type' => 'booking',
+			'post_status' => 'private',
+			'meta_query' => array(
+				'key' => 'talent_id',
+				'value' => $talent_id,
+				'compare' => '='
+			),
+		);
+		$bookings = new WP_Query($args);
+		return $bookings->posts;
 	}
 
 	public static function gt_user_belongs_to_booking($booking_id)
@@ -145,6 +155,29 @@ class GTBookingPostType
 			return false;
 		}
 
+	}
+
+
+	public static function gt_get_earnings_for_user()
+	{
+		$user_type = 'talent';
+		if(current_user_can('can_manage_recruiter_and_talent')){
+			$user_type = 'administrator';
+		}
+		$total_earnings = 0;
+		if($user_type == 'administrator'){
+			$args = array(
+				'post_type' => 'booking',
+				'post_status' => 'private',
+			);
+			$bookings_query = new WP_Query($args);
+			$bookings = $bookings_query->posts;
+			if(!$bookings) return; 
+			foreach($bookings as $booking){
+				$total_earnings += (int) get_post_meta($booking->ID, 'price', true) * 0.2;
+			}
+		}
+		return $total_earnings;
 	}
 
 }

@@ -1,7 +1,7 @@
 <?php 
 $talent_id = $variables['talent_id'];
 $talent = get_userdata($talent_id);
-$profile_image_url = get_user_meta($talent_id,'profile-image-url', true)[0];
+$profile_image_url = get_user_meta($talent_id,'profile_image_url', true);
 $profession = get_user_meta($talent_id,'talent_profession',true);
 $tags = get_user_meta($talent_id,'talent_tags',true);
 $hourly_rate = get_user_meta($talent_id,'per_hour_rate',true);

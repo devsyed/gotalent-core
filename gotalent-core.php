@@ -124,17 +124,27 @@ final class GoTalent {
         wp_enqueue_script('fullcalendar-js',GOTALENT_PUBLIC_ASSETS . '/fullcalendar.js', array(), '1.0', true );
         wp_enqueue_script('select2-js',GOTALENT_PUBLIC_ASSETS . '/select2.js', array(), '1.0', true );
         wp_enqueue_script('sweetalert-js',GOTALENT_PUBLIC_ASSETS . '/sweetalert.js', array(), '1.0', true );
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+        wp_enqueue_script('multistep-js',GOTALENT_PUBLIC_ASSETS . '/multi-step.js', array('jquery'), '1.0', true );
         wp_enqueue_script('gt-core-js',GOTALENT_PUBLIC_ASSETS . '/core.js', array('jquery','wp-tinymce','dropzone-js'), '1.0', true );
 
 
 
         wp_enqueue_style('dropzone-css',GOTALENT_PUBLIC_ASSETS . '/dropzone.css', array(), '1.0', 'all' );
         wp_enqueue_style('datatables-css','//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css', array(), '1.0', 'all' );
+        wp_enqueue_style('fontawesome','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css', array(), '1.0', 'all' );
         wp_enqueue_style('select2-css',GOTALENT_PUBLIC_ASSETS . '/select2.css', array(), '1.0', 'all' );
         wp_enqueue_style('toast-css',GOTALENT_PUBLIC_ASSETS . '/toast.min.css', array(), '1.0', 'all' );
+        wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css' );
+        wp_enqueue_style( 'jquery-ui' );  
         wp_enqueue_style('gt-core-css',GOTALENT_PUBLIC_ASSETS . '/core.css', array(), '1.0', 'all' );
 
         wp_localize_script('gt-core-js', 'gotalent_ajax', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'site_url' => home_url(),
+            'is_user_logged_in' => is_user_logged_in(),
+        ));
+        wp_localize_script('multistep-js', 'gotalent_ajax', array(
             'ajax_url' => admin_url('admin-ajax.php'),
             'site_url' => home_url(),
             'is_user_logged_in' => is_user_logged_in(),

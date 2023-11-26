@@ -79,9 +79,9 @@ jQuery(document).ready(function($){
                         window[successCallback](res.data.message); 
                     
                     }else {
-                    // if (redirectUrl) {
-                    //     handleRedirect(redirectUrl);
-                    // }
+                    if (redirectUrl) {
+                        handleRedirect(redirectUrl);
+                    }
                 }
                 }
 
@@ -94,6 +94,10 @@ jQuery(document).ready(function($){
             }
         })
     });
+
+
+    
+
 
 
     /**
@@ -208,6 +212,10 @@ jQuery(document).ready(function($){
             }
         })
     })
+
+
+
+    $(".datepicker").datepicker();
 
     
     

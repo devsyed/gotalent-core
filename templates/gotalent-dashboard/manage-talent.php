@@ -27,7 +27,7 @@ $results = GTTalentPostType::gt_get_verified_talent();
                             <td><?php echo $user->last_name ?></td>
                             <td><?php echo $user->user_email ?></td>
                             <td><?php echo $user->user_registered ?></td>
-                            <td><?php echo 'Action' ?></td>
+                            <td><a href="/author/<?php echo $user->user_nicename; ?>">View Talent Page</a></td>
                           </tr>
                         <?php endforeach; endif; ?>
                         </tbody>

@@ -22,15 +22,15 @@ $talent_packages = GTPackagePostType::gt_get_all_talent_packages(get_current_use
                             </tr>
                         </thead>
                         <tbody>
-                        <?php if($talent_packages->have_posts()): while($talent_packages->have_posts()): $talent_packages->the_post(); $package = get_post(get_the_ID()) ?>
+                        <?php if(!empty($talent_packages)): foreach($talent_packages as $package): ?>
                             <tr>
-                                <td><?php echo get_the_ID(); ?></td>
+                                <td><?php echo $package->ID; ?></td>
                                 <td><?php echo $package->post_title; ?></td>
-                                <td>AED <?php echo get_post_meta(get_the_ID(),'price',true); ?></td>
-                                <td><?php echo get_post_meta(get_the_ID(),'number_of_sets',true); ?></td>
-                                <td><a href="?query_id=<?php echo get_the_ID(); ?>">View</a></td>
+                                <td>AED <?php echo get_post_meta($package->ID,'price',true); ?></td>
+                                <td><?php echo get_post_meta($package->ID,'number_of_sets',true); ?></td>
+                                <td><a href="?query_id=<?php echo $package->ID; ?>">View</a></td>
                             </tr>
-                            <?php endwhile; wp_reset_query(); endif; ?>
+                            <?php endforeach; endif; ?>
                         </tbody>
                     </table>
                 </div>

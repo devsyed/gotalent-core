@@ -1,1 +1,1 @@
-<h1>Hello World, You are a new user.</h1>
+<h1>Welcome to Gotalent!</h1>

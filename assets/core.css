@@ -103,6 +103,7 @@ fieldset.day-single label {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 300px;
 }
 
 .gt-dropzone p {

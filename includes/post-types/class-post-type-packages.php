@@ -104,16 +104,12 @@ class GTPackagePostType {
 	public static function gt_get_all_talent_packages($talent_id)
 	{
 		$args = array(
+			'author' => $talent_id,
 			'post_type' => 'talent_package',
 			'post_status' => 'private',
-			'meta_query' => array(
-				'key' => 'talent_id',
-				'value' => $talent_id,
-				'compare' => '='
-			),
 		);
 		$packages = new WP_Query($args);
-		return $packages;
+		return $packages->posts;
 
 	}
 

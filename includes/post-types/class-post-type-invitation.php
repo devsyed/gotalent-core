@@ -17,7 +17,7 @@ class GTInvitationPostType {
 		add_action('init', [__CLASS__,'gt_create_invitation_post_type']);
 	}
 
-	public static function gt_create_Invitation_post_type()
+	public static function gt_create_invitation_post_type()
 	{
 		$labels = array(
 			'name'                  => 'Invitations',
@@ -64,47 +64,106 @@ class GTInvitationPostType {
 		register_post_type('invitation', $args);
 	}
 
-	/** 
-	 * Get all Invitations
-	 */
-	public static function gt_get_all_invitations()
-	{
-
-	}
-	
 	
 	/** 
 	 * Get Invitation by ID
 	 */
-	public static function gt_get_invitation($invtation_id)
+	public static function gt_get_invitation($invitation_id)
 	{
+		$invitation = get_post($invitation_id);
+		return $invitation;
+	}
 
+	/** 
+	 * Get Invitation by Talent ID
+	 */
+	public static function gt_get_invitations_by_talent_id($talent_id)
+	{
+		$args = array(
+			'post_type' => 'invitation',
+			'post_status' => 'private',
+			'meta_query' => array(
+				'key' => 'talent_id',
+				'value' => $talent_id,
+				'compare' => '='
+			),
+		);
+		$invitations = new WP_Query($args);
+		return $invitations->posts;
 	}
 
 
 	/** 
 	 * Create an Invitiation 
 	 */
-	public static function gt_create_invitation_request()
+	public static function gt_create_invitation_request($title, $meta = array())
 	{
+		$booking_data = array(
+			'post_title' => $title,
+			'post_type' => 'invitation',
+			'post_status' => 'private'
+		);
 
+		$invitation_id = wp_insert_post($booking_data);
+		do_action('gt_invitation_created',$meta['talent_id'], $invitation_id, $meta['recruiter_id']);
+
+		if ($invitation_id && !is_wp_error($invitation_id)) {
+			foreach ($meta as $key => $value) {
+				update_post_meta($invitation_id, $key, $value);
+			}
+		} 
+		return $invitation_id;
 	}
 
 
 	/** 
-	 * Delete an Invitation Request
+	 * Check Invitation Belongs to Talent
 	 */
-	public static function gt_delete_invitation_request()
+	public static function gt_invitation_belongs_to_talent($talent_id, $invitation_id)
 	{
+		$talent_invitations = self::gt_get_invitations_by_talent_id($talent_id);
+		
+		$invitation_belongs_to_talent = array_reduce($talent_invitations, function ($carry, $post) use ($invitation_id) {
+			return $carry || ($post->ID == $invitation_id);
+		}, false);
 
+		return $invitation_belongs_to_talent;
 	}
 
 
-	/**
-	 * Update Invitation Request
+	/** 
+	 * Accept Invitation Request
 	 */
-	public static function gt_update_invitation_request()
+	public static function gt_accept_invitation_request($invitation_id)
 	{
+
+		$package_id = get_post_meta($invitation_id,'package_id', true);
+		$package = get_post($package_id);
+		$package_price = get_post_meta($package->ID,'price', true);
+		if(!$package) return;
+
+		$thread_id = get_post_meta($invitation_id,'thread_id', true);
+
+		$talent_id = get_post_meta($invitation_id,'talent_id', true);
+		$talent = get_user_by('id', $talent_id);
+
+		$duration = get_post_meta($invitation_id,'duration', true);
+		update_post_meta($invitation_id,'invitation_status', 'accepted');
+
+
+
+		// Now create the booking 
+		$booking_meta = [
+			'invitation_id' => $invitation_id,
+			'price' => get_post_meta($package->ID,'price', true),
+			'thread_id' => get_post_meta($invitation_id,'thread_id', true),
+			'talent_id' => get_post_meta($invitation_id,'talent_id', true),
+			'duration' => get_post_meta($invitation_id,'duration', true),
+			'recruiter_id' => get_post_meta($invitation_id,'recruiter_id',true),
+		];
+		$booking = GTBookingPostType::gt_create_booking('New Booking', array(),$booking_meta);
+		return $booking;
+
 
 	}
 

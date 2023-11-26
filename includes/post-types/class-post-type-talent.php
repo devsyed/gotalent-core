@@ -135,6 +135,17 @@ class GTTalentPostType {
 	}
 
 
+	public static function gt_verify_talent($talent_id)
+	{
+		$user = get_user_by('id',$talent_id);
+		if($user){
+			update_user_meta($user->ID,'verified', true);
+			return true;
+		}
+		return false;
+	}
+
+
 
 	
 }

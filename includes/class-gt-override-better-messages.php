@@ -24,7 +24,13 @@ class GTOverrideBetterMessages
      */
     public static function gt_show_selected_message_recipeients($users)
     {
-       return [];
+        $current_user = wp_get_current_user();
+        $talent_or_recruiter = current_user_can('can_be_hired') ? 'recruiters' : 'talents';
+        $allowed_users = get_user_meta($current_user->ID, 'allowed_message_'.$talent_or_recruiter.'_recipients', true);
+        foreach($allowed_users as $allowed_user){
+            $users[] = get_user_by('id', $allowed_user);
+        }
+        return $users;
     }
     
     
@@ -37,8 +43,15 @@ class GTOverrideBetterMessages
      */
     public static function gt_show_selected_message_search_users()
     {
-       return [1];
+        $current_user = wp_get_current_user();
+        $talent_or_recruiter = current_user_can('can_be_hired') ? 'recruiters' : 'talents';
+        $allowed_users = get_user_meta($current_user->ID, 'allowed_message_'.$talent_or_recruiter.'_recipients', true);
+        foreach($allowed_users as $allowed_user){
+            $users[] = $allowed_user;
+        }
+        return $users;
     }
+
 }
 
 GTOverrideBetterMessages::init();

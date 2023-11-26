@@ -8,7 +8,7 @@
             <div class="group-select-display">
 
               <p class="nofi-job">
-                <span>1249</span> candidates recommended for you
+                <span><?php echo count($talent); ?></span> Talent recommended for you
               </p>
             </div>
             <div class="group-select">

@@ -42,9 +42,9 @@ class GTPaymentHandler {
                     ],
                 ],
                 'mode' => 'payment',
-                'metadata' => array('talent_id' => get_current_user_id(), 'booking_id' => 1, 'talent_id' => 10),
-                'success_url' => 'https://stripelink.free.beeceptor.com',
-                'cancel_url' => 'https://stripelink.free.beeceptor.com',
+                'metadata' => array('talent_id' => get_current_user_id(), 'invitation_id' => 1, 'talent_id' => 25),
+                'success_url' => site_url() . '/payment-successful?query_id=1&talent_id=25',
+                'cancel_url' => site_url() . '/payment-cancelled?query_id=1&talent_id=25',
             ]);
             return $url->url;
         }catch(Error $error){

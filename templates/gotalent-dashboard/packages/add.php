@@ -23,9 +23,10 @@
                                 'label' => 'Number of Sets',
                             ),
                             array(
-                                'type' => 'number',
+                                'type' => 'text',
                                 'name' => '_meta_price',
                                 'label' => 'Price of the Package',
+                                'info' => __('You will recieve 80% of this amount. Rest 20% will be commission to the admin', 'gotalent-core')
                             ),
 
                         )); ?>
