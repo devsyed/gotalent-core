@@ -2,6 +2,14 @@
 $total_earned = GTBookingPostType::gt_get_earnings_for_user();
 $total_bookings_query = GTBookingPostType::gt_get_all_bookings();
 $total_bookings_count = $total_bookings_query->found_posts;
+
+$current_date = current_time('Y-m-d');
+$one_month_ago = date('Y-m-d', strtotime('-1 month', strtotime($current_date)));
+
+$earnings_this_month = GTBookingPostType::gt_get_earnings_for_user(array('start_date' => $one_month_ago, 'end_date' => $current_date));
+
+$bookings_this_month_query = GTBookingPostType::gt_get_all_bookings(array('start_date' => $one_month_ago, 'end_date' => $current_date));
+$bookings_this_month_count = $bookings_this_month_query->found_posts;
 ?>
 <section class="flat-dashboard-setting">
     <div class="themes-container">
@@ -21,39 +29,17 @@ $total_bookings_count = $total_bookings_query->found_posts;
             <div class="col-lg-3">
                 <div class="single-stat-box d-flex flex-column">
                     <p class="mb-1">Bookings This Month</p>
-                    <div>0</div>
+                    <div><?php echo $bookings_this_month_count ?></div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="single-stat-box d-flex flex-column">
                     <p class="mb-1">Earnings This Month</p>
-                    <div>AED 0</div>
+                    <div>AED <?php echo $earnings_this_month ?></div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12 ">
-                <div class="profile-setting bg-white">
-                    <table id="myTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Description</th>
-                                <th>Recruiter</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
-        </div>
+        
     </div>
 </section>
 <?php GTThemeHelper::gt_get_header('footer-dashboard'); ?>

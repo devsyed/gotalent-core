@@ -1,5 +1,11 @@
 <?php GTThemeHelper::gt_get_header('header-dashboard');
-$bookings = GTBookingPostType::get_all_bookings_for_talent(get_current_user_id());
+$bookings = [];
+if(current_user_can('can_be_hired')){
+    $bookings = GTBookingPostType::get_all_bookings_for_talent(get_current_user_id());
+}
+if(current_user_can('can_manage_recruiter_and_talent')){
+    $bookings = GTBookingPostType::gt_get_all_bookings()->posts;
+}
 
 ?>
 <section class="flat-dashboard-setting">

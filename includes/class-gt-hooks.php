@@ -8,15 +8,14 @@ class GTHooks
     {
         add_filter('logout_redirect', array(__CLASS__, 'gt_redirect_to_home'), 10, 3);
         add_filter('login_redirect', function () {
-            return 'gotalent-dashboard/manage-profile';
+           return '/gotalent-dashboard/manage-bookings';
         });
 
 
-        /** After Registration Hook */
+
         add_action('user_register', array(__CLASS__, 'gt_send_email_new_account'), 10, 1);
         add_action('user_register', array(__CLASS__, 'gt_create_user_specific_folder'), 20, 1);
 
-        /** After Booking Created */
         add_action('gt_invitation_created', array(__CLASS__, 'gt_send_new_invitation_email_to_talent_and_recruiter'), 10, 3);
         add_action('gt_invitation_created', array(__CLASS__, 'gt_add_recruiter_and_talent_as_recipients'), 10, 3);
         add_action('gt_invitation_created', array(__CLASS__, 'gt_create_talent_message_thread'), 30, 3);

@@ -120,7 +120,6 @@ class GTThemeHelper
             'gotalent-dashboard/manage-bookings' => __('Manage Bookings', 'gotalent-core'),
             'gotalent-dashboard/invitations-sent' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/manage-availability' => __('Manage Availability', 'gotalent-core'),
-            'gotalent-dashboard/manage-recruiters' => __('Manage Recruiters', 'gotalent-core'),
             'gotalent-dashboard/manage-talent' => __('Manage Talent', 'gotalent-core'),
             'gotalent-dashboard/manage-talent-categories' => __('Talent Categories', 'gotalent-core'),
             'gotalent-dashboard/manage-packages' => __('Packages', 'gotalent-core'),

@@ -65,13 +65,20 @@ class GTBookingPostType
 		register_post_type('booking', $args);
 	}
 
-	public static function gt_get_all_bookings($count = -1, $offset = 0)
+	public static function gt_get_all_bookings($date = array(), $count = -1, $offset = 0)
 	{
 		$booking_args = array(
 			'post_type' => 'booking',
 			'posts_per_page' => $count,
 			'offset' => $offset,
 		);
+		if(!empty($date)){
+			$booking_args['date_query'] = [
+				'after'     => $date['start_date'],
+				'before'    => $date['end_date'],
+				'inclusive' => true, 
+			];
+		}
 		return new WP_Query($booking_args);
 	}
 
@@ -158,24 +165,32 @@ class GTBookingPostType
 	}
 
 
-	public static function gt_get_earnings_for_user()
+	public static function gt_get_earnings_for_user($date = array())
 	{
+		
 		$user_type = 'talent';
 		if(current_user_can('can_manage_recruiter_and_talent')){
 			$user_type = 'administrator';
 		}
 		$total_earnings = 0;
-		if($user_type == 'administrator'){
-			$args = array(
-				'post_type' => 'booking',
-				'post_status' => 'private',
-			);
-			$bookings_query = new WP_Query($args);
-			$bookings = $bookings_query->posts;
-			if(!$bookings) return; 
-			foreach($bookings as $booking){
-				$total_earnings += (int) get_post_meta($booking->ID, 'price', true) * 0.2;
-			}
+		$commission_rate = ($user_type == 'administrator') ? 0.2 : 0.8;
+		
+		$args = array(
+			'post_type' => 'booking',
+			'post_status' => 'private',
+		);
+		if(!empty($date)){
+			$args['date_query'] = [
+				'after'     => $date['start_date'],
+				'before'    => $date['end_date'],
+				'inclusive' => true, 
+			];
+		}
+		$bookings_query = new WP_Query($args);
+		$bookings = $bookings_query->posts;
+		if(!$bookings) return; 
+		foreach($bookings as $booking){
+			$total_earnings += (int) get_post_meta($booking->ID, 'price', true) * $commission_rate;
 		}
 		return $total_earnings;
 	}

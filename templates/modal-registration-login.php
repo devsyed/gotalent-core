@@ -1,3 +1,4 @@
+
 <div class="modal fade gt-modal" id="registration-modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -87,7 +88,7 @@
                     <div class="tab-pane fade" id="as-recruiter" role="tabpanel" aria-labelledby="profile-tab"
                         tabindex="0">
                         <p class="error-form"></p>
-                        <form method="POST" class="gt-form" action="gotalent/authenticate/login" data-redirect-url="<?php echo home_url() . '/gotalent-dashboard/manage-profile' ?>">
+                        <form method="POST" class="gt-form" action="gotalent/authenticate/login" data-redirect-url="<?php echo home_url()  ?>">
                                 <?php GTFormHelper::generate_form_fields(
                                     array(
                                         array(
