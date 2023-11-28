@@ -141,11 +141,14 @@ class GTBookingPostType
 			'post_type' => 'booking',
 			'post_status' => 'private',
 			'meta_query' => array(
-				'key' => 'talent_id',
-				'value' => $talent_id,
-				'compare' => '='
+				array(
+					'key' => 'talent_id',
+					'value' => $talent_id,
+					'compare' => '='
+				),
 			),
 		);
+		
 		$bookings = new WP_Query($args);
 		return $bookings->posts;
 	}

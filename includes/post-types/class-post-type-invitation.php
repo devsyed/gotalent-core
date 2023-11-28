@@ -83,9 +83,11 @@ class GTInvitationPostType {
 			'post_type' => 'invitation',
 			'post_status' => 'private',
 			'meta_query' => array(
-				'key' => 'talent_id',
+				array(
+					'key' => 'talent_id',
 				'value' => $talent_id,
 				'compare' => '='
+				)
 			),
 		);
 		$invitations = new WP_Query($args);
