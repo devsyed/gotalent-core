@@ -35,7 +35,7 @@
             ));
           ?>
           <?php if(!is_user_logged_in()): ?>
-            <button class="btn-gt-default" data-bs-toggle="modal" data-bs-target="#registration-modal"><?php echo __('Register','gotalent'); ?></button>
+            <button class="btn-gt-default" data-bs-toggle="modal" data-bs-target="#registration-modal"><?php echo __('Login/Register','gotalent'); ?></button>
           <?php else: ?>
             <div class="header-customize-item account">
               <a href="<?php echo (current_user_can('can_manage_recruiter_and_talent')) ? '/gotalent-dashboard/manage-bookings' : '/gotalent-dashboard/manage-profile' ?>" class="btn-gt-default"><?php echo __('Dashboard', 'gotalent-core'); ?></a>

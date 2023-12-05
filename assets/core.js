@@ -132,17 +132,17 @@ jQuery(document).ready(function($){
 
 
     /** Generate Payment Link Button*/
-    setTimeout(function(){
-        var target =  document.querySelector(".chat-footer"); 
-        if(!target) return;
-        var paymentLinkGenerator = document.createElement("button");
-        paymentLinkGenerator.classList.add("generate-payment-link");
-        paymentLinkGenerator.dataset.bsToggle = 'modal';
-        paymentLinkGenerator.dataset.bsTarget = '#generatePaymentLink';
-        paymentLinkGenerator.innerText = 'Generate Payment Link'
-        target.appendChild(paymentLinkGenerator)
+    // setTimeout(function(){
+    //     var target =  document.querySelector(".chat-footer"); 
+    //     if(!target) return;
+    //     var paymentLinkGenerator = document.createElement("button");
+    //     paymentLinkGenerator.classList.add("generate-payment-link");
+    //     paymentLinkGenerator.dataset.bsToggle = 'modal';
+    //     paymentLinkGenerator.dataset.bsTarget = '#generatePaymentLink';
+    //     paymentLinkGenerator.innerText = 'Generate Payment Link'
+    //     target.appendChild(paymentLinkGenerator)
         
-    },1000) 
+    // },1000) 
 
 
     /** Get Subcategories based on Category | Dashboard */

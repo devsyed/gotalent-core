@@ -21,7 +21,7 @@
                 <div class="tab-content p-3">
                     <div class="tab-pane fade show active" id="as-talent" role="tabpanel" tabindex="0">
                     <p class="error-form"></p>
-                    <form method="POST" class="gt-form" action="gotalent/authenticate/register" data-redirect-url="<?php echo home_url() . '/gotalent-dashboard/manage-profile' ?>">
+                    <form method="POST" class="gt-form" action="gotalent/authenticate/register" data-redirect-url="<?php echo home_url()  ?>">
                             <div class="d-flex gap-2">
                                 <?php GTFormHelper::generate_form_fields(
                                     array(

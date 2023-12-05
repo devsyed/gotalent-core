@@ -17,7 +17,7 @@
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
                                 'input_id' => '_meta_proof_one',
-                                'message' => 'Verification 1'
+                                'message' => 'Passport Copy'
                             ),
                             array(
                                 'type' => 'file',
@@ -25,15 +25,7 @@
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
                                 'input_id' => '_meta_proof_two',
-                                'message' => 'Verification 2'
-                            ),
-                            array(
-                                'type' => 'file',
-                                'name' => 'cover-image-uploader',
-                                'action' => 'gt_upload_images',
-                                'max_upload' => 1,
-                                'input_id' => '_meta_proof_three',
-                                'message' => 'Verification 3'
+                                'message' => 'ID Copy'
                             ),
                         ))
                     ?>

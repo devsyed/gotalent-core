@@ -1,5 +1,5 @@
 <?php GTThemeHelper::gt_get_header('header-dashboard');
-$available_days = (get_user_meta(get_current_user_id(), 'available_days', true)) ? get_user_meta(get_current_user_id(), 'available_days', true) : [];
+$available_days = (get_user_meta(get_current_user_id(), 'available_days', true)) ? get_user_meta(get_current_user_id(), 'available_days', true) : ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
 ?>    
 <section class="flat-dashboard-setting">
     <div class="themes-container">

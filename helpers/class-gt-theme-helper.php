@@ -123,7 +123,7 @@ class GTThemeHelper
             'gotalent-dashboard/manage-talent' => __('Manage Talent', 'gotalent-core'),
             'gotalent-dashboard/manage-talent-categories' => __('Talent Categories', 'gotalent-core'),
             'gotalent-dashboard/manage-packages' => __('Packages', 'gotalent-core'),
-            'gotalent-dashboard/manage-portfolio' => __('Manage Portfolio', 'gotalent-core'),
+            'gotalent-dashboard/manage-media' => __('Manage Media', 'gotalent-core'),
             'gotalent-dashboard/manage-verification-settings' => __('Vertification Settings', 'gotalent-core'),
             'gotalent-dashboard/manage-payment-settings' => __('Payment Settings', 'gotalent-core'),
             'gotalent-dashboard/earnings' => __('Earnings', 'gotalent-core'),
@@ -147,7 +147,7 @@ class GTThemeHelper
                 unset($sidebar_links['gotalent-dashboard/pending-talent-verification']);
                 unset($sidebar_links['gotalent-dashboard/manage-packages']);
                 unset($sidebar_links['gotalent-dashboard/earnings']);
-                unset($sidebar_links['gotalent-dashboard/manage-portfolio']);
+                unset($sidebar_links['gotalent-dashboard/manage-media']);
                 unset($sidebar_links['gotalent-dashboard/manage-invitations']);
                 
                 break;
@@ -170,7 +170,7 @@ class GTThemeHelper
                     unset($sidebar_links['gotalent-dashboard/manage-verification-settings']);
                     unset($sidebar_links['gotalent-dashboard/manage-profile']);
                     unset($sidebar_links['gotalent-dashboard/manage-packages']);
-                    unset($sidebar_links['gotalent-dashboard/manage-portfolio']);
+                    unset($sidebar_links['gotalent-dashboard/manage-media']);
                     unset($sidebar_links['gotalent-dashboard/manage-invitations']);
                     unset($sidebar_links['gotalent-dashboard/invitations-sent']);
                     

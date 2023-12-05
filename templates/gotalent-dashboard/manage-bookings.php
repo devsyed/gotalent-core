@@ -4,7 +4,6 @@ if(current_user_can('can_be_hired')){
     $bookings = GTBookingPostType::get_all_bookings_for_talent(get_current_user_id());
 }
 if(current_user_can('can_manage_recruiter_and_talent')){
-    echo 'also this';
     $bookings = GTBookingPostType::gt_get_all_bookings()->posts;
 }
 
@@ -20,7 +19,7 @@ if(current_user_can('can_manage_recruiter_and_talent')){
                                 <th>#</th>
                                 <th>Description</th>
                                 <th>Recruiter</th>
-                                <th>Amount Earned</th>
+                                <th>Amount</th>
                                 <th>Date</th>
                                 <th>Action</th>
                             </tr>
@@ -36,7 +35,7 @@ if(current_user_can('can_manage_recruiter_and_talent')){
                                             ?></td>
                                         <td><strong>
                                                 AED <?php
-                                                    echo (get_post_meta($booking->ID, 'price', true) * 0.8);
+                                                    echo get_post_meta($booking->ID, 'price', true);
                                                     ?>
                                             </strong>
 

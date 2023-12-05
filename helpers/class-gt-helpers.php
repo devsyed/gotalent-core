@@ -68,4 +68,10 @@ class GTHelpers
     {
         self::gt_load_template($template_name, $variables);
     }
+
+
+
+    public static function gt_is_url($string) {
+        return filter_var($string, FILTER_VALIDATE_URL) !== false;
+    }
 }

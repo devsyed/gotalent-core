@@ -23,11 +23,16 @@ $hourly_rate = get_user_meta($user->ID,'per_hour_rate', true);
 $talent_selected_category = get_user_meta($user->ID, 'talent_category', true);
 $talent_selected_subcategory = get_user_meta($user->ID, 'talent_sub_category', true);
 $talent_profession = get_user_meta($user->ID,'talent_profession', true);
-$talent_tags = get_user_meta($user->ID,'talent_tags', true);
+$talent_tags = get_user_meta($user->ID,'talent_tags', true) || [];
 $requirements = get_user_meta($user->ID,'requirement_for_performing', true);
 
 $talent_sub_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categories($talent_selected_category);
 $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_id');
+
+$city = get_user_meta($user->ID,'city', true);
+
+$country = get_user_meta($user->ID,'country', true);
+
 ?>
 
 <section class="flat-dashboard-setting">
@@ -137,46 +142,40 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                         ?>
                         </div>
 
-                        <div class="social-wrap border-bt">
-                            <h3><?php echo __('Social Networking Sites','gotalent-core'); ?></h3>
-                            <div class="form-social form-wg flex flat-form">
-                                <div class="form-box info-wd wg-box">
-                                    <fieldset class="flex2">
-                                        <span class="icon-facebook"></span>
-                                        <input name="_meta_facebook_profile" type="text" class="input-form"
-                                            value="<?php echo $facebook_profile; ?>">
-                                    </fieldset>
-                                    <fieldset class="flex2">
-                                        <span class="icon-twitter"></span>
-                                        <input name="_meta_twitter_profile" type="text" class="input-form2"
-                                            placeholder="URL" value="<?php echo $twitter_profile; ?>">
-                                    </fieldset>
-                                    <fieldset class="flex2">
-                                        <span class="icon-instagram1"></span>
-                                        <input name="_meta_instagram_profile" type="text" class="input-form2"
-                                            placeholder="URL" value="<?php echo $instagram_profile; ?>">
-                                    </fieldset>
-                                </div>
-                                <div class="form-box info-wd wg-box">
-                                    <fieldset class="flex2">
-                                        <span class="icon-linkedin2"></span>
-                                        <input name="_meta_linkedin_profile" type="text" class="input-form2"
-                                            placeholder="URL" value="<?php echo $linkedin_profile; ?>">
-                                    </fieldset>
-                                    <fieldset class="flex2">
-                                        <span class="icon-pinterest"></span>
-                                        <input name="_meta_pinterest_profile" type="text" class="input-form2"
-                                            placeholder="URL" value="<?php echo $pinterest_profile; ?>">
-                                    </fieldset>
-                                    <fieldset class="flex2">
-                                        <span class="icon-youtube"></span>
-                                        <input name="_meta_youtube_profile" type="text" class="input-form2"
-                                            placeholder="URL" value="<?php echo $youtube_profile; ?>">
-                                    </fieldset>
-
-                                </div>
-                            </div>
+                        <div class="gt-form-row">
+                        <?php
+                            GTFormHelper::generate_dashboard_form_fields(
+                                array(
+                                    array(
+                                        'type' => 'select',
+                                        'name' => '_meta_city',
+                                        'label' => 'City',
+                                        'required' => false,
+                                        'options' => [
+                                            'Ras Al Khaimah' => 'Ras Al Khaimah',
+                                            'Sharjah' => 'Sharjah',
+                                            'Dubai' => 'Dubai',
+                                            'Fujairah' => 'Fujairah',
+                                            'Al Ain' => 'Al Ain',
+                                            'Abu Dhabi' => 'Abu Dhabi',
+                                        ],
+                                        'value' => 'Dubai',
+                                    ),
+                                    array(
+                                        'type' => 'select',
+                                        'name' => '_meta_country',
+                                        'label' => 'Country',
+                                        'required' => false,
+                                        'options' => [
+                                            'United Arab Emirates' => 'United Arab Emirates',
+                                            
+                                        ],
+                                        'value' => $country,
+                                    )
+                            ));
+                        ?>
                         </div>
+
                     </div>
 
                 </div>

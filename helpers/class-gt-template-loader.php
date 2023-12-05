@@ -20,7 +20,7 @@ class GTTemplateLoader
                 'single_page' => 'gotalent-dashboard/talent/unverified_single'
             ),
             'gotalent-dashboard/manage-bookings' => array(
-                'single_page' => 'gotalent-dashboard/bookings/index'
+                'single_page' => 'gotalent-dashboard/bookings/single',
             ),
             'gotalent-dashboard/notifications' => array(),
             'gotalent-dashboard/earnings' => array(),
@@ -48,6 +48,10 @@ class GTTemplateLoader
                 'add_new_page' => 'gotalent-dashboard/talent-categories/add',
                 'single_page' => 'gotalent-dashboard/talent-categories/single',
             ),
+            'gotalent-dashboard/invitations-sent' => array(
+                'allowed_capabilities' => array('can_hire_talent'),
+                'single_page' => 'gotalent-dashboard/invitations/sent-invitation-single',
+            ),
             'gotalent-dashboard/manage-packages' => array(
                 'allowed_capabilities' => array('can_be_hired'),
                 'add_new_page' => 'gotalent-dashboard/packages/add',
@@ -57,7 +61,7 @@ class GTTemplateLoader
                 'allowed_capabilities' => array('can_be_hired'),
                 'single_page' => 'gotalent-dashboard/invitations/single'
             ),
-            'gotalent-dashboard/manage-portfolio' => array(
+            'gotalent-dashboard/manage-media' => array(
                 'allowed_capabilities' => array('can_be_hired'),
             ),
             'buy-package' => array(

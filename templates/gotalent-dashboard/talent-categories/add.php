@@ -2,6 +2,7 @@
 
 $talent_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categories(false,1);
 $talent_categories = wp_list_pluck($talent_categories_obj,'name', 'term_id');
+$talent_categories[0] = 'Select Category';
 ?>
 <script>
 

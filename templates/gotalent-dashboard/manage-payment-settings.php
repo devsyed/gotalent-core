@@ -3,13 +3,14 @@ $account_full_name = get_user_meta(get_current_user_id(), 'account_full_name', t
 $bank_name = get_user_meta(get_current_user_id(), 'bank_name', true);
 $swift_code = get_user_meta(get_current_user_id(), 'swift_code', true);
 $account_number = get_user_meta(get_current_user_id(), 'account_number', true);
-$routing_number = get_user_meta(get_current_user_id(), 'routing_number', true);
+$iban_number = get_user_meta(get_current_user_id(), 'iban_number', true);
 ?>
 <section class="flat-dashboard-setting">
     <div class="themes-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 ">
                 <div class="profile-setting bg-white">
+                    
                     <form action="gotalent/user/process_meta" method="POST" class="gt-form" data-redirect-url="/gotalent-dashboard/manage-payment-settings">
                         <div class="gt-form-row">
                             <?php GTFormHelper::generate_dashboard_form_fields(array(
@@ -44,13 +45,14 @@ $routing_number = get_user_meta(get_current_user_id(), 'routing_number', true);
                                 ),
                                 array(
                                     'type' => 'text',
-                                    'name' => '_meta_routing_number',
-                                    'label' => 'Routing Number',
-                                    'value' => $routing_number,
+                                    'name' => '_meta_iban_number',
+                                    'label' => 'IBAN Number',
+                                    'value' => $iban_number,
                                 ),
 
                             )) ?>
                         </div>
+                        <h6>*<strong>International Payments will incur an extra charge.</strong></h6>
                         <div class="save-form-wrapper">
 
                             <button type="submit" class="ms-3 btn-gt-default"><?php echo __('Save Payment Settings', 'gotalent-core'); ?></button>

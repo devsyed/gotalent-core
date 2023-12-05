@@ -15,7 +15,7 @@
                             array(
                                 'type' => 'number',
                                 'name' => '_meta_duration',
-                                'label' => 'Duration',
+                                'label' => 'Duration <small>(Duration in minutes / set)</small>',
                             ),
                             array(
                                 'type' => 'number',
@@ -26,7 +26,7 @@
                                 'type' => 'text',
                                 'name' => '_meta_price',
                                 'label' => 'Price of the Package',
-                                'info' => __('You will recieve 80% of this amount. Rest 20% will be commission to the admin', 'gotalent-core')
+                                'info' => __('You will recieve 80% of this amount. Rest 20% will be commission to the <strong>Gotalent</strong>', 'gotalent-core')
                             ),
 
                         )); ?>

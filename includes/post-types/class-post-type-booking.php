@@ -113,7 +113,6 @@ class GTBookingPostType
 		return wp_delete_post($booking_id, true); // Set to true to force delete from trash
 	}
 
-
 	public static function gt_update_booking($booking_id, $title, $content = '', $meta = array())
 	{
 		$booking_data = array(
@@ -166,7 +165,6 @@ class GTBookingPostType
 		}
 
 	}
-
 
 	public static function gt_get_earnings_for_user($date = array())
 	{

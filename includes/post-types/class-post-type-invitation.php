@@ -64,19 +64,12 @@ class GTInvitationPostType {
 		register_post_type('invitation', $args);
 	}
 
-	
-	/** 
-	 * Get Invitation by ID
-	 */
 	public static function gt_get_invitation($invitation_id)
 	{
 		$invitation = get_post($invitation_id);
 		return $invitation;
 	}
 
-	/** 
-	 * Get Invitation by Talent ID
-	 */
 	public static function gt_get_invitations_by_talent_id($talent_id)
 	{
 		$args = array(
@@ -94,10 +87,23 @@ class GTInvitationPostType {
 		return $invitations->posts;
 	}
 
+	public static function gt_get_invitations_by_recruiter_id($recruiter_id)
+	{
+		$args = array(
+			'post_type' => 'invitation',
+			'post_status' => 'private',
+			'meta_query' => array(
+				array(
+					'key' => 'recruiter_id',
+				'value' => $recruiter_id,
+				'compare' => '='
+				)
+			),
+		);
+		$invitations = new WP_Query($args);
+		return $invitations->posts;
+	}
 
-	/** 
-	 * Create an Invitiation 
-	 */
 	public static function gt_create_invitation_request($title, $meta = array())
 	{
 		$booking_data = array(
@@ -113,14 +119,12 @@ class GTInvitationPostType {
 			foreach ($meta as $key => $value) {
 				update_post_meta($invitation_id, $key, $value);
 			}
+			// Add Invitation status to pending 
+			update_post_meta($invitation_id,'status', 'pending');
 		} 
 		return $invitation_id;
 	}
 
-
-	/** 
-	 * Check Invitation Belongs to Talent
-	 */
 	public static function gt_invitation_belongs_to_talent($talent_id, $invitation_id)
 	{
 		$talent_invitations = self::gt_get_invitations_by_talent_id($talent_id);
@@ -132,10 +136,17 @@ class GTInvitationPostType {
 		return $invitation_belongs_to_talent;
 	}
 
+	public static function gt_invitation_belongs_to_recruiter($recruiter_id, $invitation_id)
+	{
+		$talent_invitations = self::gt_get_invitations_by_recruiter_id($recruiter_id);
+		
+		$invitation_belongs_to_talent = array_reduce($talent_invitations, function ($carry, $post) use ($invitation_id) {
+			return $carry || ($post->ID == $invitation_id);
+		}, false);
 
-	/** 
-	 * Accept Invitation Request
-	 */
+		return $invitation_belongs_to_talent;
+	}
+
 	public static function gt_accept_invitation_request($invitation_id)
 	{
 
@@ -153,15 +164,16 @@ class GTInvitationPostType {
 		update_post_meta($invitation_id,'invitation_status', 'accepted');
 
 
+		$recruiter_id = get_post_meta($invitation_id,'recruiter_id',true);
 
 		// Now create the booking 
 		$booking_meta = [
 			'invitation_id' => $invitation_id,
-			'price' => get_post_meta($package->ID,'price', true),
-			'thread_id' => get_post_meta($invitation_id,'thread_id', true),
-			'talent_id' => get_post_meta($invitation_id,'talent_id', true),
-			'duration' => get_post_meta($invitation_id,'duration', true),
-			'recruiter_id' => get_post_meta($invitation_id,'recruiter_id',true),
+			'price' => $package_price,
+			'thread_id' => $thread_id,
+			'talent_id' => $talent_id,
+			'duration' => $duration,
+			'recruiter_id' => $recruiter_id,
 		];
 		$booking = GTBookingPostType::gt_create_booking('New Booking', array(),$booking_meta);
 		return $booking;
@@ -169,8 +181,6 @@ class GTInvitationPostType {
 
 	}
 
-
-	
 }
 
 GTInvitationPostType::init();

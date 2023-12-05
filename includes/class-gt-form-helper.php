@@ -102,6 +102,7 @@ class GTFormHelper
                     case 'text':
                     case 'password':
                     case 'email':
+                    case 'url':
                     
                     case 'number':
                         echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . ' value="'.$value.'">
@@ -118,7 +119,7 @@ class GTFormHelper
                         if (isset($field['options']) && is_array($field['options'])) {
                             echo '<select id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . '>';
                             foreach ($field['options'] as $option_value => $option_label) {
-                                $selected = ($option_value == $field['default']) ? 'selected' : false;
+                                $selected = ($option_value == $field['default'] || $option_value == $field['value']) ? 'selected' : false;
                                 echo '<option value="' . $option_value . '" '.$selected.'>' . $option_label . '</option>';
                             }
                             echo '</select>';
@@ -169,15 +170,15 @@ class GTFormHelper
 
                         break;
                     case 'multiselect':
-                        if (isset($field['options']) && is_array($field['options'])) {
                         echo '<select class="js-example-basic-multiple" name="'.$field['name'].'[]"
-                            multiple="multiple">';
-                            foreach ($field['options'] as $option_value => $option_label) {
-                            $selected = ($option_value == 0) ? true : false;
-                            echo '<option value="' . strtolower($option_label) . '" '.$selected.' selected="selected">' . ucfirst($option_label) . '</option>';
-                            }
-                            echo '</select>';
+                        multiple="multiple">';
+                        foreach ($field['options'] as $option_value => $option_label) {
+                        $selected = ($option_value == 0) ? true : false;
+                        echo '<option value="' . strtolower($option_label) . '" '.$selected.' selected="selected">' . ucfirst($option_label) . '</option>';
                         }
+                        echo '</select>';
+                    
+                        
                         break;
 
                     default:

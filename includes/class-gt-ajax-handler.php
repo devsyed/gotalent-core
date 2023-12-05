@@ -131,9 +131,6 @@ class GTAjaxHandler
     }
 
 
-    /** 
-     * Generate Payment Link 
-     */
     public static function gotalent_generate_payment_link()
     {
         try{
@@ -151,11 +148,6 @@ class GTAjaxHandler
         }
     }
 
-
-    /** 
-     * 
-     * Add Talent Category
-     */
     public static function gotalent_talent_categories_add_new()
     {
         try{
@@ -173,19 +165,12 @@ class GTAjaxHandler
         }
     }
 
-    /** 
-     * Get Subcategories
-     */
     public static function gotalent_get_talent_subcategories()
     {
         $cats = GTTaxonomy_Talent_Category::gt_get_all_talent_categories($_GET['parent_id']);
         self::send_ajax_success($cats);
     }
 
-
-    /** 
-     * Process User Meta
-     */
     public static function gotalent_user_process_meta()
     {
         $meta_fields = [];
@@ -212,10 +197,6 @@ class GTAjaxHandler
         }
     }
 
-
-    /** 
-     * Upload Profile Image
-     */
     public static function gt_upload_images()
     {
         $image_id = $_REQUEST['id'];
@@ -227,10 +208,6 @@ class GTAjaxHandler
         }
     }
 
-
-    /** 
-     * Update Days | Availability
-     */
     public static function gotalent_availabilities_update_days()
     {
         parse_str($_POST['formData'],$data);
@@ -238,11 +215,6 @@ class GTAjaxHandler
         self::send_ajax_success($availabilities_updated);
     }
 
-
-    /** 
-     * Add Package for Talent
-     * 
-     */
     public static function gotalent_packages_add_package()
     {
         try{
@@ -259,18 +231,19 @@ class GTAjaxHandler
         }
     }
 
-
-    /** 
-     * Add Portfolio
-     */
     public static function gotalent_talent_add_portfolio()
     {
         $pieces = explode("&", $_POST['formData']);
         $result = array();
+        $metaFields = array();
         foreach ($pieces as $piece) {
             $pair = explode("=", $piece);
             $key = urldecode($pair[0]);
             $value = urldecode($pair[1]);
+
+            if (strpos($key, '_meta_') !== false) {
+                $metaFields[$key] = $value;
+            }
 
             if (!isset($result[$key])) {
                 $result[$key] = array();
@@ -279,12 +252,9 @@ class GTAjaxHandler
             $result[$key][] = $value;
         }
         update_user_meta(get_current_user_id(), 'portfolio_links', $result['_meta_portfolio_links']);
+        update_user_meta(get_current_user_id(), 'portfolio_video_links', $metaFields);
     }
 
-    /** 
-     * Store User Package 
-     * 
-     */
     public static function gotalent_store_package_session()
     {
         try{
@@ -296,7 +266,6 @@ class GTAjaxHandler
             self::send_ajax_error($er);
         }
     }
-
 
     public static function gotalent_create_invitation()
     {
@@ -314,7 +283,6 @@ class GTAjaxHandler
         }
     }
 
-
     public static function gotalent_accept_invitation()
     {
         try {
@@ -326,8 +294,7 @@ class GTAjaxHandler
         }
 
     }
-
-
+    
     public static function gotalent_talent_approve_talent()
     {
         try {
