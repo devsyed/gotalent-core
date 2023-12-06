@@ -34,7 +34,7 @@ jQuery(document).ready(function($){
     /** Datatables */
     let table = new DataTable('#myTable', {
         responsive: true,
-        searching: false,
+        searching: true,
         paging: false,
     });
     /** End Datatables  */
