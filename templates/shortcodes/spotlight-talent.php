@@ -1,7 +1,9 @@
 <?php 
 $all_spotlight_videos = GTSpotlightHandler::gt_get_all_spotlight_talent_videos();
 $all_video_ids = array_values($all_spotlight_videos[0]);
-unset($all_video_ids[0]);
+if($all_video_ids[0]) {
+    unset($all_video_ids[0]);
+}
 ?>
 <div class="spotlight-talent-videos swiper">
     <div class="swiper-wrapper">
