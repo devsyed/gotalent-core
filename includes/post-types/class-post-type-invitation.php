@@ -119,7 +119,7 @@ class GTInvitationPostType {
 			foreach ($meta as $key => $value) {
 				update_post_meta($invitation_id, $key, $value);
 			}
-			// Add Invitation status to pending 
+			
 			update_post_meta($invitation_id,'status', 'pending');
 		} 
 		return $invitation_id;

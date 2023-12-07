@@ -39,7 +39,8 @@ final class GoTalent {
         define('GOTALENT_TEXT_DOMAIN', 'gotalent-core');
     }
 
-    private function includes() {
+    private function includes() 
+    {
         require_once GOTALENT_PLUGIN_PATH . '/helpers/class-gt-helpers.php';
         require_once GOTALENT_PLUGIN_PATH . '/helpers/class-gt-template-loader.php';
         require_once GOTALENT_PLUGIN_PATH . '/helpers/class-gt-theme-helper.php';
@@ -48,6 +49,7 @@ final class GoTalent {
         require_once GOTALENT_PLUGIN_PATH . '/includes/class-gt-role-handler.php';
         require_once GOTALENT_PLUGIN_PATH . '/includes/class-gt-payment-handler.php';
         require_once GOTALENT_PLUGIN_PATH . '/includes/class-gt-mailer.php';
+        require_once GOTALENT_PLUGIN_PATH . '/includes/class-gt-spotlight-handler.php';
 
         /** Post Types | GoTalent  */
         require_once GOTALENT_PLUGIN_PATH . '/includes/post-types/class-post-type-withdraw.php';

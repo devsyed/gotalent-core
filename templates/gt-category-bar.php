@@ -5,7 +5,7 @@
         <ul class="swiper-wrapper align-items-center">
           <?php if($talent_cats): foreach($talent_cats as $talent_cat): ?>
             <li class="swiper-slide text-center">
-                <a href="<?php echo $talent_cat->slug ?>"><?php echo $talent_cat->name; ?></a>
+                <a href="/talent?cat_slug=<?php echo $talent_cat->slug ?>"><?php echo $talent_cat->name; ?></a>
             </li>
           <?php endforeach; endif; ?>
         </ul>

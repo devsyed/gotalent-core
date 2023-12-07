@@ -127,7 +127,7 @@ $formatted_proofs = array_filter($proofs);
             </div>
           </div>
           <div class="save-form-wrapper">
-                <form action="gotalent/talent/approve_talent" data-redirect-url="/pending-talent-verification?query_id=<?php echo $talent->ID ?>" method="POST" class="gt-form">
+                <form action="gotalent/talent/approve_talent" data-redirect-url="/gotalent-dashboard/pending-talent-verification?query_id=<?php echo $talent->ID ?>" method="POST" class="gt-form">
                 <input type="hidden" name="talent_id" value="<?php echo $talent->ID ?>">
                 <button type="submit" class="btn-gt-default"><?php echo __('Approve Talent', 'gotalent-core'); ?></button>
                 </form>

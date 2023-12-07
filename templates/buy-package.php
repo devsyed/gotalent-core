@@ -47,6 +47,14 @@ $package_price = get_post_meta($package_id, 'price', true);
                                             'options' => array('Ras Al Khaimah' => 'Ras Al Khaimah', 'Dubai' => 'Dubai', 'Sharjah' => 'Sharjah', 'Al Ain' => 'Al Ain', 'Fujairah' => 'Fujairah'),
 
                                         ),
+                                        array(
+                                            'type' => 'text',
+                                            'name' => 'event_location_address',
+                                            'required' => true,
+                                            'label' => 'Event Address',
+                                            
+
+                                        ),
                                     ))
                                     ?>
                                 </div>
