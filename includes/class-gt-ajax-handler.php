@@ -18,7 +18,10 @@ class GTAjaxHandler
         'gotalent_store_package_session',
         'gotalent_create_invitation',
         'gotalent_accept_invitation',
-        'gotalent_talent_approve_talent'
+        'gotalent_talent_approve_talent',
+        'gotalent_talent_set_as_spotlight',
+        'gotalent_talent_unset_as_spotlight',
+        'gotalent_settings_update_settings',
 
     ];
 
@@ -30,12 +33,6 @@ class GTAjaxHandler
         }
     }
 
-    /**
-     * Handle AJAX response with consistent error handling.
-     *
-     * @param mixed  $response
-     * @param string $success_message
-     */
     public static function handle_ajax_response($response, $success_message = 'Request successful')
     {
         if (is_wp_error($response)) {
@@ -45,11 +42,6 @@ class GTAjaxHandler
         }
     }
 
-    /**
-     * Send an AJAX error response with appropriate HTTP status code.
-     *
-     * @param WP_Error $wp_error
-     */
     public static function send_ajax_error($wp_error)
     {
         $error_data = [
@@ -61,22 +53,11 @@ class GTAjaxHandler
         wp_send_json_error($error_data, $http_status_code);
     }
 
-    /**
-     * Send an AJAX success response.
-     *
-     * @param array $data
-     */
     public static function send_ajax_success($message)
     {
         wp_send_json_success(['code' => 1, 'message' => $message]);
     }
 
-    /**
-     * Verify a nonce and handle rejection.
-     *
-     * @param string $nonce
-     * @param string $action
-     */
     public static function verify_nonce($nonce, $action)
     {
         if (!wp_verify_nonce($nonce, $action)) {
@@ -84,10 +65,6 @@ class GTAjaxHandler
         }
     }
 
-
-    /**
-     * GoTalent Authenticate | Login User
-     */
     public static function gotalent_authenticate_login()
     {
         try {
@@ -107,11 +84,6 @@ class GTAjaxHandler
         }
     }
     
-    
-    /** 
-     * GoTalent Authenticate | Register User
-     * gotalent_register_nonce
-     */
     public static function gotalent_authenticate_register()
     {
         try {
@@ -242,7 +214,7 @@ class GTAjaxHandler
             $value = urldecode($pair[1]);
 
             if (strpos($key, '_meta_') !== false) {
-                $metaFields[$key] = $value;
+                $metaFields[$key] = GTHelpers::gt_get_youtube_video_id($value);
             }
 
             if (!isset($result[$key])) {
@@ -302,6 +274,44 @@ class GTAjaxHandler
             $approve_talent = GTTalentPostType::gt_verify_talent($data['talent_id']);
             if($approve_talent){
                 self::send_ajax_success('Talent Approved');
+            }
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
+    }
+
+    public static function gotalent_talent_set_as_spotlight()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            $set_talent = GTTalentPostType::gt_set_as_spotlight($data['talent_id']);
+            if($set_talent){
+                self::send_ajax_success($set_talent);
+            }
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
+    }
+
+    public static function gotalent_talent_unset_as_spotlight()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            $unset_talent = GTTalentPostType::gt_unset_as_spotlight($data['talent_id']);
+            if($unset_talent){
+                self::send_ajax_success($unset_talent);
+            }
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
+    }
+
+    public static function gotalent_settings_update_settings()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            foreach($data as $key => $setting){
+                update_option($key,$setting);
             }
         } catch (\Throwable $th) {
             self::send_ajax_error($th);

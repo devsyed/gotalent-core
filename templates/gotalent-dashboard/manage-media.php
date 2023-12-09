@@ -2,8 +2,10 @@
 $existing_portfolio = get_user_meta(get_current_user_id(), 'portfolio_links', true);
 $allowed_videos_link = 5;
 $portfolio_video_links = get_user_meta(get_current_user_id(), 'portfolio_video_links', true);
+
 $values = [];
 for($i = 0; $i < $allowed_videos_link; $i++){
+    if(empty($portfolio_video_links['_meta_portfolio_video_link_' . $i])) continue;
     $values[] = $portfolio_video_links['_meta_portfolio_video_link_' . $i];
 }
 
@@ -14,7 +16,7 @@ for($i = 0; $i < $allowed_videos_link; $i++){
         'type' => 'text',
         'name' => '_meta_portfolio_video_link_' . $i,
         'label' => 'Add Portfolio Video ' . $i + 1,
-        'value' => $values[$i]
+        'value' => (isset($values[$i])) ? $values[$i] : ''
     );
 }
 
@@ -51,8 +53,8 @@ for($i = 0; $i < $allowed_videos_link; $i++){
                     <?php GTFormHelper::generate_dashboard_form_fields($fields) ?>
                 </div>
                     <div class="save-form-wrapper">
-                <button type="submit" class="btn-gt-default"><?php echo __('Save Portfolio', 'gotalent-core'); ?></button>
-            </div>
+                        <button type="submit" class="btn-gt-default"><?php echo __('Save Portfolio', 'gotalent-core'); ?></button>
+                    </div>
                    </form>
                 </div>
 

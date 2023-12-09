@@ -29,11 +29,7 @@ class GTHelpers
             include($template_path);
         }
     }
-
-
-
-
-
+    
     /**
      * Get the HTML content of a template from the theme (if available) or from plugin templates.
      *
@@ -61,17 +57,21 @@ class GTHelpers
         return ob_get_clean();
     }
 
-
-
-
     public static function gt_get_template_part($template_name, $variables = array())
     {
         self::gt_load_template($template_name, $variables);
     }
 
-
-
     public static function gt_is_url($string) {
         return filter_var($string, FILTER_VALIDATE_URL) !== false;
+    }
+
+    public static function gt_get_youtube_video_id($string)
+    {
+        if(!self::gt_is_url($string)) return $string;
+        $urlParts = parse_url($string);
+        parse_str($urlParts['query'], $queryVars);
+        $videoId = isset($queryVars['v']) ? $queryVars['v'] : null;
+        return $videoId;
     }
 }

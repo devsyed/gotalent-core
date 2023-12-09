@@ -67,6 +67,9 @@ class GTTemplateLoader
             'buy-package' => array(
                 'single_page' => 'buy-package',
                 'requires_authentication' => false,
+            ),
+            'book-talent' => array(
+                'single_page' => 'book-talent',
             )
         );
         return apply_filters('gt_allowed_endpoints', $endpoints);

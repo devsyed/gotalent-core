@@ -33,7 +33,7 @@ class GTSpotlightHandler
         $all_talent_videos = [];
         if(!empty($talent)){
             foreach($talent as $talent_single){
-                $all_talent_videos[] = get_user_meta($talent_single->ID,'portfolio_video_links',true);
+                $all_talent_videos[$talent_single->ID][] = get_user_meta($talent_single->ID,'portfolio_video_links',true);
             }
         }
         return $all_talent_videos;

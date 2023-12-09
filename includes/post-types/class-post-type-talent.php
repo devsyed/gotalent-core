@@ -145,6 +145,17 @@ class GTTalentPostType {
 		return false;
 	}
 
+	public static function gt_set_as_spotlight($talent_id){
+		update_user_meta($talent_id,'is_spotlight_talent', 'yes');
+		return true;
+	}
+	
+	
+	public static function gt_unset_as_spotlight($talent_id){
+		delete_user_meta($talent_id,'is_spotlight_talent', 'yes');
+		return true;
+	}
+
 
 
 	

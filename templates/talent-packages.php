@@ -8,7 +8,11 @@
                         <div class="group-col-3">
                             <?php if(!empty($packages)): foreach($packages as $package):  ?>
                                 <?php GTHelpers::gt_get_template_part('package-single.php', $package); ?>
-                            <?php endforeach; endif; ?>
+                            <?php 
+                            endforeach; 
+                            else:
+                            echo 'Talent does not have any Packages ';
+                            endif; ?>
                         </div>
                     </div>
                 </div>

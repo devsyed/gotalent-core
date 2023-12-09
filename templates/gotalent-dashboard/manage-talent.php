@@ -16,6 +16,7 @@ $results = GTTalentPostType::gt_get_verified_talent();
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Date Applied</th>
+                                <th>Set as Featured</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -27,6 +28,17 @@ $results = GTTalentPostType::gt_get_verified_talent();
                             <td><?php echo $user->last_name ?></td>
                             <td><?php echo $user->user_email ?></td>
                             <td><?php echo $user->user_registered ?></td>
+                            <td><?php if(!get_user_meta($user->ID,'is_spotlight_talent',true) == 'yes'): ?>
+                                <form method="POST" action="gotalent/talent/set_as_spotlight" class="gt-form">
+                                    <input type="hidden" name="talent_id" value="<?php echo $user->ID ?>">
+                                    <button class="btn-gt-default" type="submit">Set as Spotlight Talent</button>
+                                </form>
+                            <?php else: ?>
+                                <form method="POST" action="gotalent/talent/unset_as_spotlight" class="gt-form">
+                                    <input type="hidden" name="talent_id" value="<?php echo $user->ID ?>">
+                                    <button class="btn-gt-default" type="submit">Remove From Spotlight Talent</button>
+                                </form>
+                            <?php endif; ?></td>
                             <td><a href="/author/<?php echo $user->user_nicename; ?>">View Talent Page</a></td>
                           </tr>
                         <?php endforeach; endif; ?>

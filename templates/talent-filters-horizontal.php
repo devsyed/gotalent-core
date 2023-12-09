@@ -3,7 +3,7 @@ $talent_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categorie
 $talent_categories = wp_list_pluck($talent_categories_obj,'name', 'term_id');
 $talent_sub_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categories();
 $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_id');
-
+$searched_keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 
 ?>
 <section class="form-sticky stc2">
@@ -15,7 +15,8 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                             array(
                                 'type' => 'text', 
                                 'name' => 'keyword',
-                                'label' => 'Keyword'
+                                'label' => 'Keyword',
+                                'value' => $searched_keyword
                             ),
                             array(
                                 'type' => 'select',
@@ -32,24 +33,6 @@ $talent_sub_categories = wp_list_pluck($talent_sub_categories_obj,'name', 'term_
                                 'onchange' => 'gt_get_subcategories',
                                 'options' => [],
 
-                            ),
-                            array(
-                                'type' => 'number', 
-                                'name' => '_meta_per_hour_rate',
-                                'label' => 'Package Budget',
-                                'required' => true,
-                                'max' => 10000,
-                                'step' => 100,
-                                'value' => 1000,
-                            ),
-                            array(
-                                'type' => 'number', 
-                                'name' => '_meta_per_hour_rate',
-                                'label' => 'Hourly Rate',
-                                'required' => true,
-                                'max' => 10000,
-                                'step' => 100,
-                                'value' => 100,
                             ),
                         )) ?>
                     <div class="form-group-btn mt-3">

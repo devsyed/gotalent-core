@@ -33,11 +33,11 @@ $package_price = get_post_meta($package_id, 'price', true);
                                     <?php
                                     GTFormHelper::generate_form_fields(array(
                                         array(
-                                            'type' => 'text',
+                                            'type' => 'select',
                                             'name' => 'event_type',
                                             'required' => true,
                                             'label' => 'Event Type',
-                                            'placeholder' => 'Eg: Birthday Party',
+                                            'options' => array('Hotels & Restaurant'=>'Hotels & Restaurant','Clubs & Pubs' => 'Clubs & Pubs','Wedding' => 'Wedding'),
                                         ),
                                         array(
                                             'type' => 'select',
