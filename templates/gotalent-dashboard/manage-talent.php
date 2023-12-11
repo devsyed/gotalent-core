@@ -18,6 +18,7 @@ $results = GTTalentPostType::gt_get_verified_talent();
                                 <th>Date Applied</th>
                                 <th>Set as Featured</th>
                                 <th>Action</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,9 @@ $results = GTTalentPostType::gt_get_verified_talent();
                                 </form>
                             <?php endif; ?></td>
                             <td><a href="/author/<?php echo $user->user_nicename; ?>">View Talent Page</a></td>
+                            <td><button class="btn-gt-secondary">
+                            Remove Talent
+                            </button></td>
                           </tr>
                         <?php endforeach; endif; ?>
                         </tbody>

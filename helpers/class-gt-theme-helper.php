@@ -121,6 +121,7 @@ class GTThemeHelper
             'gotalent-dashboard/invitations-sent' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/manage-availability' => __('Manage Availability', 'gotalent-core'),
             'gotalent-dashboard/manage-talent' => __('Manage Talent', 'gotalent-core'),
+            'gotalent-dashboard/manage-recruiters' => __('Manage Recruiters', 'gotalent-core'),
             'gotalent-dashboard/manage-talent-categories' => __('Talent Categories', 'gotalent-core'),
             'gotalent-dashboard/manage-packages' => __('Packages', 'gotalent-core'),
             'gotalent-dashboard/manage-media' => __('Manage Media', 'gotalent-core'),
