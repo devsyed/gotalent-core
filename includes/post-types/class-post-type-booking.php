@@ -166,7 +166,7 @@ class GTBookingPostType
 
 	}
 
-	public static function gt_get_earnings_for_user($date = array())
+	public static function gt_get_earnings_for_user($user_id = 0,$date = array())
 	{
 		
 		$user_type = 'talent';
@@ -180,6 +180,15 @@ class GTBookingPostType
 			'post_type' => 'booking',
 			'post_status' => 'private',
 		);
+		if($user_type == 'talent' && $user_id !== 0){
+			$args['meta_query'] = array(
+				array(
+					'key' => 'talent_id',
+					'value' => $user_id
+				)
+			);
+		}
+
 		if(!empty($date)){
 			$args['date_query'] = [
 				'after'     => $date['start_date'],

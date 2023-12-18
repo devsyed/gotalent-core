@@ -8,13 +8,15 @@ $packages = GTPackagePostType::gt_get_all_talent_packages($talent_id);
     <div class="container mt-5 py-5">
         <div class="row justify-content-start">
             <div class="col-md-8">
-            <?php 
+                <div class="row">
+                <?php 
             if(!empty($packages)): foreach($packages as $package):
                  GTHelpers::gt_get_template_part('package-single.php', $package); 
                     endforeach; 
                 else:
                     echo 'Talent does not have any Packages ';
              endif; ?>
+                </div>
             </div>
         </div>
     </div>

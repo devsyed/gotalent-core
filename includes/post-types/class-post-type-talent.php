@@ -90,6 +90,10 @@ class GTTalentPostType {
 					'key'     => 'verified',
 					'compare' => 'EXISTS'
 				),
+				array(
+					'key' => 'deleted_user',
+					'compare' => 'NOT EXISTS'
+				)
 			)
 		));
 		$results = $verified_talent->get_results();
@@ -108,6 +112,10 @@ class GTTalentPostType {
 					'value'   => $cat_id,
 					'compare' => '='
 				),
+				array(
+					'key' => 'deleted_user',
+					'compare' => 'NOT EXISTS'
+				)
 			)
 		);
 		$query = new WP_User_Query( $args);
@@ -128,6 +136,10 @@ class GTTalentPostType {
 					'value'   => true,
 					'compare' => 'NOT EXISTS'
 				),
+				array(
+					'key' => 'deleted_user',
+					'compare' => 'NOT EXISTS'
+				)
 			)
 		));
 		$results = $unverified_talent->get_results();

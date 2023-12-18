@@ -14,7 +14,7 @@ $description = get_post_meta($package_id,'description', true);
         <div class="row">
             <div class="col-lg-12 col-md-12 ">
                 <div class="profile-setting bg-white">
-                    <form action="gotalent/packages/add_package" method="POST" data-redirect-url="gotalent-dashboard/manage-packages" class="gt-form">
+                    <form action="gotalent/packages/add_package" method="POST" data-redirect-url="/gotalent-dashboard/manage-packages" class="gt-form">
                         <div class="gt-form-row">
                         <?php GTFormHelper::generate_dashboard_form_fields(array(
                             array(

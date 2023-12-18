@@ -41,9 +41,12 @@ $results = GTTalentPostType::gt_get_verified_talent();
                                 </form>
                             <?php endif; ?></td>
                             <td><a href="/author/<?php echo $user->user_nicename; ?>">View Talent Page</a></td>
-                            <td><button class="btn-gt-secondary">
-                            Remove Talent
-                            </button></td>
+                            <td>
+                                <form action="gotalent/talent/remove_talent" method="POST" class="gt-form">
+                                    <input type="hidden" name="talent_id" value="<?php echo $user->ID ?>">    
+                                    <button type="submit" class="btn-gt-default">Remove Talent</button>
+                                </form>
+                            </td>
                           </tr>
                         <?php endforeach; endif; ?>
                         </tbody>

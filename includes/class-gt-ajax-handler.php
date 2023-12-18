@@ -22,6 +22,7 @@ class GTAjaxHandler
         'gotalent_talent_set_as_spotlight',
         'gotalent_talent_unset_as_spotlight',
         'gotalent_settings_update_settings',
+        'gotalent_talent_remove_talent'
 
     ];
 
@@ -313,6 +314,18 @@ class GTAjaxHandler
             foreach($data as $key => $setting){
                 update_option($key,$setting);
             }
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
+    }
+
+    public static function gotalent_talent_remove_talent()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            $talent_id = $data['talent_id'];
+            $delete_id = update_user_meta($talent_id,'deleted_user', true);
+            self::send_ajax_success($delete_id);
         } catch (\Throwable $th) {
             self::send_ajax_error($th);
         }

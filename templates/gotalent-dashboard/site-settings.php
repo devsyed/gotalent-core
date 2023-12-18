@@ -27,6 +27,7 @@
                                     ),
                                 )); ?>
                         </div>
+                        <a href="/wp-admin/post.php?post=244&action=elementor">Edit FAQ</a>
                         <div class="save-form-wrapper">
                             <button type="submit" class="btn-gt-default"><?php echo __('Save Settings', 'gotalent-core'); ?></button>
                         </div>

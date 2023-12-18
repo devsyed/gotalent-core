@@ -13,7 +13,13 @@ class GTAuthentication
             'user_password' => $password,
             'remember' => $remember,
         ),false);
-        return $user_id; 
+
+        if (is_wp_error($user_id)) {
+            echo $user_id->get_error_message();
+        } else {
+            wp_set_auth_cookie($user_id->ID, true);
+        }
+        return $user_id->ID;
     }
 
 
