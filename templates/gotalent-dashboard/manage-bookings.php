@@ -1,9 +1,12 @@
 <?php GTThemeHelper::gt_get_header('header-dashboard');
 $bookings = [];
-if(current_user_can('can_be_hired')){
+if (current_user_can('can_be_hired')) {
     $bookings = GTBookingPostType::get_all_bookings_for_talent(get_current_user_id());
 }
-if(current_user_can('can_manage_recruiter_and_talent')){
+if (current_user_can('can_hire_talent')) {
+    $bookings = GTBookingPostType::get_all_bookings_for_recruiter(get_current_user_id());
+}
+if (current_user_can('can_manage_recruiter_and_talent')) {
     $bookings = GTBookingPostType::gt_get_all_bookings()->posts;
 }
 
@@ -18,7 +21,9 @@ if(current_user_can('can_manage_recruiter_and_talent')){
                             <tr>
                                 <th>#</th>
                                 <th>Description</th>
-                                <th>Recruiter</th>
+                                <th><?php echo (current_user_can('can_hire_talent') || current_user_can('can_manage_recruiter_and_talent')) ? 'Talent' : 'Recruiter' ?>
+                                </th>
+                                <?php echo (current_user_can('can_manage_recruiter_and_talent')) && '<th>Talent</th>'; ?>
                                 <th>Amount</th>
                                 <th>Date</th>
                                 <th>Action</th>
@@ -26,24 +31,29 @@ if(current_user_can('can_manage_recruiter_and_talent')){
                         </thead>
                         <tbody>
                             <?php if (!empty($bookings)) : foreach ($bookings as $booking) : ?>
-                                    <tr>
-                                        <td><?php echo $booking->ID ?></td>
-                                        <td><?php echo get_post_meta($booking->ID, 'event_type', true) ?></td>
-                                        <td><?php
-                                            $recruiter = get_user_by('id', get_post_meta($booking->ID, 'recruiter_id', true));
-                                            echo $recruiter->first_name . ' ' . $recruiter->last_name;
+                            <tr>
+                                <td><?php echo $booking->ID ?></td>
+                                <td><?php echo get_post_meta($booking->ID, 'event_type', true) ?></td>
+                                <td>
+                                    <?php
+                                            $user_type = (current_user_can('can_hire_talent')  || current_user_can('can_manage_recruiter_and_talent')) ? 'talent' : 'recruiter';
+                                            $user = get_user_by('id', get_post_meta($booking->ID, $user_type . '_id', true));
+                                            echo $user->first_name . ' ' . $user->last_name;
                                             ?></td>
-                                        <td><strong>
-                                                AED <?php
-                                                    echo get_post_meta($booking->ID, 'price', true);
+                                <?php echo (current_user_can('can_manage_recruiter_and_talent')) && '<td>' . $user = get_user_by('id', get_post_meta($booking->ID, 'talent_id', true)) . '</td>'; ?>
+                                <td><strong>
+                                        AED <?php
+                                        $package = get_post(get_post_meta($booking->ID,'package_id',true));
+                                                    echo get_post_meta($package->ID, 'price', true);
                                                     ?>
-                                            </strong>
+                                    </strong>
 
-                                        </td>
-                                        <td><?php echo $booking->post_date; ?></td>
-                               
-                                        <td><?php echo !(get_post_meta($booking->ID, 'invitation_status', true)) ? '<a href="?query_id=' . $booking->ID . '">View Details</a>' : ''; ?></td>
-                                    </tr>
+                                </td>
+                                <td><?php echo $booking->post_date; ?></td>
+
+                                <td><a href="?query_id=<?php echo $booking->ID ?>">View Details</a>
+                                </td>
+                            </tr>
                             <?php endforeach;
                             endif; ?>
                         </tbody>

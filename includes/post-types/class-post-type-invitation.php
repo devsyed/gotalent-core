@@ -95,8 +95,13 @@ class GTInvitationPostType {
 			'meta_query' => array(
 				array(
 					'key' => 'recruiter_id',
-				'value' => $recruiter_id,
-				'compare' => '='
+					'value' => $recruiter_id,
+					'compare' => '='
+				),
+				array(
+					'key' => 'invitation_status',
+					'value' => 'booking_created',
+					'compare' => '!='
 				)
 			),
 		);
@@ -120,7 +125,7 @@ class GTInvitationPostType {
 				update_post_meta($invitation_id, $key, $value);
 			}
 			
-			update_post_meta($invitation_id,'status', 'pending');
+			update_post_meta($invitation_id,'invitation_status', 'pending');
 		} 
 		return $invitation_id;
 	}
@@ -166,17 +171,15 @@ class GTInvitationPostType {
 
 		$recruiter_id = get_post_meta($invitation_id,'recruiter_id',true);
 
-		// Now create the booking 
-		$booking_meta = [
-			'invitation_id' => $invitation_id,
-			'price' => $package_price,
-			'thread_id' => $thread_id,
-			'talent_id' => $talent_id,
-			'duration' => $duration,
-			'recruiter_id' => $recruiter_id,
-		];
-		$booking = GTBookingPostType::gt_create_booking('New Booking', array(),$booking_meta);
-		return $booking;
+		/** genreate payment link */
+		$booking_details = 'You are booking ' . $talent->display_name . ' for ' . $package->post_title . '.';
+		$payment_token = wp_create_nonce('invitation_id_' . $invitation_id); 
+		$payment_link = GTPaymentHandler::gt_create_payment_link($package_price, $booking_details, $invitation_id,$payment_token);
+
+		update_post_meta($invitation_id,'payment_link', $payment_link);
+
+		
+		return $invitation_id;
 
 
 	}

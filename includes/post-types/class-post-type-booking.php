@@ -69,8 +69,7 @@ class GTBookingPostType
 	{
 		$booking_args = array(
 			'post_type' => 'booking',
-			'posts_per_page' => $count,
-			'offset' => $offset,
+			'post_status' => 'private',
 		);
 		if(!empty($date)){
 			$booking_args['date_query'] = [
@@ -134,6 +133,25 @@ class GTBookingPostType
 		}
 	}
 
+	public static function get_all_bookings_for_recruiter($recruiter_id)
+	{
+		$args = array(
+			'post_type' => 'booking',
+			'post_status' => 'private',
+			'meta_query' => array(
+				array(
+					'key' => 'recruiter_id',
+					'value' => $recruiter_id,
+					'compare' => '='
+				),
+			),
+		);
+		
+		$bookings = new WP_Query($args);
+		return $bookings->posts;
+	}
+	
+	
 	public static function get_all_bookings_for_talent($talent_id)
 	{
 		$args = array(

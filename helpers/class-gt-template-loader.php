@@ -70,6 +70,9 @@ class GTTemplateLoader
             ),
             'book-talent' => array(
                 'single_page' => 'book-talent',
+            ),
+            'payment-successful' => array(
+                'single_page' => 'payment-successful',
             )
         );
         return apply_filters('gt_allowed_endpoints', $endpoints);

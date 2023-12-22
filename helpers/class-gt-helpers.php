@@ -62,7 +62,8 @@ class GTHelpers
         self::gt_load_template($template_name, $variables);
     }
 
-    public static function gt_is_url($string) {
+    public static function gt_is_url($string)
+    {
         return filter_var($string, FILTER_VALIDATE_URL) !== false;
     }
 
@@ -73,5 +74,11 @@ class GTHelpers
         parse_str($urlParts['query'], $queryVars);
         $videoId = isset($queryVars['v']) ? $queryVars['v'] : null;
         return $videoId;
+    }
+
+    public static function gt_verify_nonce($string,$action)
+    {
+        $verify_nonce = wp_verify_nonce($string,$action);
+        return $verify_nonce;
     }
 }

@@ -32,6 +32,7 @@ $recruiter = get_user_by('id', get_post_meta($booking_id,'recruiter_id', true));
                             </strong><?php echo get_post_meta($booking_id,'start_time', true); ?> </li>
                     </ul>
                 </div>
+                <?php if(current_user_can('can_be_hired')): ?>
                 <div class="save-form-wrapper">
                     <form action="gotalent/accept_booking" method="POST" class="gt-form">
                         <input type="hidden" name="booking_id" value="<?php echo $booking_id; ?>">
@@ -41,6 +42,7 @@ $recruiter = get_user_by('id', get_post_meta($booking_id,'recruiter_id', true));
                         <?php endif; ?>
                     </form>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

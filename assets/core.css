@@ -127,3 +127,28 @@ fieldset.day-single label {
     box-shadow: 5px 5px 10px #000;
     right: 0;
 }
+
+.box-thankyou {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+.box-thankyou img {
+    max-width: 100px;
+    margin-bottom: 50px;
+}
+
+.box-thankyou h4 {
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 500;
+}
+
+.box-thankyou a {
+    font-weight: 600;
+    font-size: 21px;
+    text-decoration: underline;
+    color: var(--gt-color-red);
+}

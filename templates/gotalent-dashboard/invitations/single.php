@@ -37,7 +37,7 @@ $recruiter = get_user_by('id', get_post_meta($invitation_id,'recruiter_id', true
                 <div class="save-form-wrapper">
                     <form action="gotalent/accept_invitation" method="POST" class="gt-form">
                         <input type="hidden" name="invitation_id" value="<?php echo $invitation_id; ?>">
-                        <?php if(!(get_post_meta($invitation_id,'invitation_status',true))) : ?>
+                        <?php if((get_post_meta($invitation_id,'invitation_status',true) === 'pending')) : ?>
                             <button type="submit" class="btn-gt-default-2"><?php echo __('Decline Invitation', 'gotalent-core'); ?></button>
                             <button type="submit" class="btn-gt-default"><?php echo __('Accept Invitation', 'gotalent-core'); ?></button>
                         <?php endif; ?>

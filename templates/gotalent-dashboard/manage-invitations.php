@@ -36,7 +36,7 @@ $invitations = GTInvitationPostType::gt_get_invitations_by_talent_id(get_current
                                         ?>
                                     </td>
                                     <td><?php echo $invitation->post_date; ?></td>
-                                    <td><?php echo (get_post_meta($invitation->ID,'invitation_status', true)) ? ucwords(get_post_meta($invitation->ID,'invitation_status', true)) : 'Awaiting Response'; ?></td>
+                                    <td><?php echo ucwords(get_post_meta($invitation->ID,'invitation_status', true)); ?></td>
                                     <td><?php echo '<a href="?query_id='. $invitation->ID.'">View Details</a>' ?></td>
                                 </tr>
                             <?php endforeach; endif; ?>

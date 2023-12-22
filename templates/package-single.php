@@ -1,6 +1,6 @@
 <?php $package = $variables;
 ?>
-<div class="col-5 pricing-box me-2  mb-2">
+<div class="col-4 pricing-box mb-2">
     <div class="group-tag">
         <div class="tag1"><?php echo $package['post_title']; ?></div>
     </div>

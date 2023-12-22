@@ -7,7 +7,7 @@ $packages = GTPackagePostType::gt_get_all_talent_packages($talent_id);
 <div class="wrapper-buy-package">
     <div class="container mt-5 py-5">
         <div class="row justify-content-start">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="row">
                 <?php 
             if(!empty($packages)): foreach($packages as $package):

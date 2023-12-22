@@ -29,7 +29,9 @@ $invitations = GTInvitationPostType::gt_get_invitations_by_recruiter_id(get_curr
                                     <td><?php echo get_post_meta($invitation->ID,'event_type', true); ?></td>
                                     <td><?php echo get_post_meta($invitation->ID,'event_date', true); ?></td>
                                     <td><?php echo $invitation->post_date; ?></td>
-                                    <td><?php echo get_post_meta($invitation->ID,'status',true); ?></td>
+                                    <td>
+                                        <?php echo (get_post_meta($invitation->ID,'invitation_status',true) !== 'pending') ? '<strong><a href="'.get_post_meta($invitation->ID,'payment_link', true).'">Pay Now</a></strong>' : get_post_meta($invitation->ID,'invitation_status',true); ?>
+                                    </td>
                                     <td><a href="?query_id=<?php echo $invitation->ID ?>">View Details</a></td>
                                 </tr>
                             <?php endforeach; endif; ?>
