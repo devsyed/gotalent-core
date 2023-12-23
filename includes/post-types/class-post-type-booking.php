@@ -218,7 +218,8 @@ class GTBookingPostType
 		$bookings = $bookings_query->posts;
 		if(!$bookings) return; 
 		foreach($bookings as $booking){
-			$total_earnings += (int) get_post_meta($booking->ID, 'price', true) * $commission_rate;
+			$package = get_post(get_post_meta($booking->ID,'package_id', true));
+			$total_earnings += (int) get_post_meta($package->ID, 'price', true) * $commission_rate;
 		}
 		return $total_earnings;
 	}

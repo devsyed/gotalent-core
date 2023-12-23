@@ -31,7 +31,8 @@ $recruiter = get_user_by('id', get_post_meta($invitation_id,'recruiter_id', true
                         <li class="my-2"><strong>Total Duration Required:
                             </strong><?php echo get_post_meta($invitation_id,'duration', true); ?> </li>
                         <li class="my-2"><strong>Start Time
-                            </strong><?php echo get_post_meta($invitation_id,'start_time', true); ?> </li>
+                             </strong><?php echo get_post_meta($invitation_id,'start_time', true); ?> 
+                        </li>
                     </ul>
                 </div>
                 <div class="save-form-wrapper">
