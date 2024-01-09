@@ -8,7 +8,7 @@ class GTMailer
 {
 
 
-    public static function gt_send_mail($to,$from,$from_name, $subject,$template_name)
+    public static function gt_send_mail($to,$from,$from_name, $subject,$template_name, $meta = array())
     {
         $mail = new PHPMailer\PHPMailer();
         $mail->isSMTP();
@@ -23,7 +23,8 @@ class GTMailer
         $mail->setFrom($from, $from_name);
         $mail->addAddress($to);
         $mail->Subject = esc_html($subject);
-        $mail->Body = GTHelpers::gt_get_template_content($template_name);
+        $user = get_user_by('email', $to);
+        $mail->Body = GTHelpers::gt_get_template_content($template_name, array("user" => $user, 'meta' => $meta));
 
         try {
             $mail->send();

@@ -1,4 +1,36 @@
+<?php $redirect_link = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>
+<style>
+    #password-strength {
+      margin-top: 10px;
+    }
+  </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const passwordField = document.getElementById("password");
+      passwordField.addEventListener("input", checkPasswordStrength);
 
+      function checkPasswordStrength() {
+        const password = passwordField.value;
+
+        const minLength = 8;
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password);
+
+        let strength = 0;
+        strength += password.length >= minLength ? 1 : 0;
+        strength += hasUppercase ? 1 : 0;
+        strength += hasLowercase ? 1 : 0;
+        strength += hasNumber ? 1 : 0;
+        strength += hasSpecialChar ? 1 : 0;
+
+        const strengthText = ['Very Weak', 'Weak', 'Moderate', 'Strong', 'Very Strong'];
+        const strengthElement = document.getElementById('password-strength');
+        strengthElement.innerHTML = `Password Strength: <strong>${strengthText[strength]}</strong>`;
+      }
+    });
+  </script>
 <div class="modal fade gt-modal" id="registration-modal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -21,7 +53,7 @@
                 <div class="tab-content p-3">
                     <div class="tab-pane fade show active" id="as-talent" role="tabpanel" tabindex="0">
                     <p class="error-form"></p>
-                    <form method="POST" class="gt-form" action="gotalent/authenticate/register" data-redirect-url="<?php echo home_url()  ?>">
+                    <form method="POST" class="gt-form" action="gotalent/authenticate/register">
                             <div class="d-flex gap-2">
                                 <?php GTFormHelper::generate_form_fields(
                                     array(
@@ -30,6 +62,7 @@
                                             'name' => 'first_name',
                                             'label' => 'First name',
                                             'required' => false,
+                                            
                                         ),
                                         array(
                                             'type' => 'text',
@@ -66,19 +99,26 @@
                                         'name' => 'password',
                                         'label' => 'Password',
                                         'required' => true,
+                                        'id' => 'password_strength'
                                     ),
-                                    array(
-                                        'type' => 'radio',
-                                        'name' => 'apply_as',
-                                        'label' => 'Apply As',
-                                        'options' => array(
-                                            'talent' => 'Apply as Talent',
-                                            'recruiter' => 'Apply as Recruiter',
-                                        ),
-                                        'checked' => 'recruiter',
-                                    ),
+                                    
                                 ));
                             ?>
+                             <div id="password-strength"></div>
+                            <?php GTFormHelper::generate_form_fields(array(
+                                array(
+                                    'type' => 'radio',
+                                    'name' => 'apply_as',
+                                    'label' => 'Apply As',
+                                    'options' => array(
+                                        'talent' => 'Apply as Talent',
+                                        'recruiter' => 'Apply as Recruiter',
+                                    ),
+                                    'checked' => 'recruiter',
+                                ),
+                            )); ?>
+                            
+
 
 
                             <button type="submit" class="btn-gt-default"><?php echo __('Create Account', 'gotalent-core'); ?></button>
@@ -88,7 +128,7 @@
                     <div class="tab-pane fade" id="as-recruiter" role="tabpanel" aria-labelledby="profile-tab"
                         tabindex="0">
                         <p class="error-form"></p>
-                        <form method="POST" class="gt-form" action="gotalent/authenticate/login" data-redirect-url="<?php echo home_url()  ?>">
+                        <form method="POST" class="gt-form" action="gotalent/authenticate/login">
                                 <?php GTFormHelper::generate_form_fields(
                                     array(
                                         array(

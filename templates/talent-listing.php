@@ -30,6 +30,7 @@
           <div class="inner">
             <div class="group-col-3">
               <?php if(!empty($talent)): foreach($talent as $talent_single): ?>
+                
                 <?php GTHelpers::gt_get_template_part('talent-listing-single.php',array('talent_id' => $talent_single->ID)); ?>
               <?php endforeach; endif; ?>
             </div>

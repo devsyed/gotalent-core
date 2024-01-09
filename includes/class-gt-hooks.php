@@ -57,7 +57,7 @@ class GTHooks
     public static function gt_send_email_new_account($user_id)
     {
         $user = get_user_by('id', $user_id);
-        $mail = GTMailer::gt_send_mail($user->user_email, 'welcome@gotalent.com', 'GoTalent', 'Welcome to GoTalent - Account Information', 'emails/new-registration.php');
+        $mail = GTMailer::gt_send_mail($user->user_email, 'welcome@gotalent.com', 'GoTalent', 'Welcome to GoTalent - Account Information', 'emails/talent-new-registration.php');
         if ($mail) {
             update_user_meta($user_id, 'welcome_email_sent', true);
             return true;

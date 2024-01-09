@@ -8,7 +8,7 @@ $packages = GTPackagePostType::gt_get_all_talent_packages($talent_id);
     <div class="container mt-5 py-5">
         <div class="row justify-content-start">
             <div class="col-md-12">
-                <div class="row">
+                <div class="row gap-5">
                 <?php 
             if(!empty($packages)): foreach($packages as $package):
                  GTHelpers::gt_get_template_part('package-single.php', $package); 

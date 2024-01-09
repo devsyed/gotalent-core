@@ -128,7 +128,6 @@ class GTThemeHelper
             'gotalent-dashboard/manage-verification-settings' => __('Vertification Settings', 'gotalent-core'),
             'gotalent-dashboard/manage-payment-settings' => __('Payment Settings', 'gotalent-core'),
             'gotalent-dashboard/earnings' => __('Earnings', 'gotalent-core'),
-            'gotalent-dashboard/notifications' => __('Notifications', 'gotalent-core'),
             'gotalent-dashboard/messages' => __('Messages', 'gotalent-core'),
             'gotalent-dashboard/site-settings' => __('Settings', 'gotalent-core'),
             'gotalent-dashboard/pending-talent-verification' => __('Pending Talent Verification', 'gotalent-core'),

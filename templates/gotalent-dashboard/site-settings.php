@@ -25,8 +25,45 @@
                                         'label' => 'Youtube URL',
                                         'value' => get_option('youtube_url'),
                                     ),
+                                    
                                 )); ?>
                         </div>
+                       <div class="gt-form-row">
+                        <?php
+                            GTFormHelper::generate_dashboard_form_fields(array(
+                                array(
+                                    'type' => 'text',
+                                    'name' => 'address',
+                                    'label' => 'Address',
+                                    'value' => get_option('address'),
+                                ),
+                                array(
+                                    'type' => 'text',
+                                    'name' => 'contact_number',
+                                    'label' => 'Contact Number',
+                                    'value' => get_option('contact_number'),
+                                ),
+                            ))
+                        ?>
+                       </div>
+                       <div class="gt-form-row">
+                        <?php
+                            GTFormHelper::generate_dashboard_form_fields(array(
+                                array(
+                                    'type' => 'text',
+                                    'name' => 'google_play_link',
+                                    'label' => 'App Google Store Link',
+                                    'value' => get_option('google_play_link'),
+                                ),
+                                array(
+                                    'type' => 'text',
+                                    'name' => 'apple_store_link',
+                                    'label' => 'iOS App Store Link',
+                                    'value' => get_option('apple_store_link'),
+                                ),
+                            ))
+                        ?>
+                       </div>
                         <a href="/wp-admin/post.php?post=244&action=elementor">Edit FAQ</a>
                         <div class="save-form-wrapper">
                             <button type="submit" class="btn-gt-default"><?php echo __('Save Settings', 'gotalent-core'); ?></button>

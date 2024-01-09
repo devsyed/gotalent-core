@@ -4,8 +4,10 @@
       <div class="row align-items-center">
         <div class="col-3">
           <div class="d-flex">
-            <button class="mobile-menu-btn d-block d-lg-none"><i class="fas fa-bars"></i></button>
+            <div class="logo-main">
             <?php if(function_exists('gt_logo')): gt_logo(); endif; ?>
+            <br><small>Powered by <strong>The Only Dandy</strong></small>
+            </div>
           </div>
         </div>
         <div class="col-9 d-flex align-items-center justify-content-end justify-content-lg-between ">

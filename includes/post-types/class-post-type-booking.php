@@ -96,6 +96,10 @@ class GTBookingPostType
 
 		$booking_id = wp_insert_post($booking_data);
 		do_action('gt_booking_created',$meta['talent_id'], $booking_id, $meta['recruiter_id']);
+		$talent = get_user_by('id', $meta['talent_id']);
+		$mail_to_talent = GTMailer::gt_send_mail($talent->user_email,'bookings@gotalent.global', 'GoTalent', 'Your New Booking is Created', 'emails/talent-new-booking.php',array('booking_id' => $booking_id) );
+
+		// now mail the admin 
 
 		if ($booking_id && !is_wp_error($booking_id)) {
 			if(!empty($meta)){

@@ -56,7 +56,7 @@ jQuery(document).ready(function($){
         var button = $(form).find('button[type="submit"]');
         setLoader(button);
         var action = makeActionNameReady($(this).attr('action'));
-        var redirectUrl = $(this).data('redirect-url');
+        var redirectUrl = $(this).data('redirect-url') || window.location.href;
         $.ajax({
             method:method,
             url:gotalent_ajax.ajax_url,
@@ -114,7 +114,7 @@ jQuery(document).ready(function($){
     function handleRedirect(redirectUrl)
     {
         setTimeout(function(){
-            window.location.href = redirectUrl;
+            window.location.href = redirectUrl || window.location.href;
         },3000)
     }
 

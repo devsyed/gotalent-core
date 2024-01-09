@@ -274,6 +274,7 @@ class GTAjaxHandler
             parse_str($_POST['formData'], $data);
             $approve_talent = GTTalentPostType::gt_verify_talent($data['talent_id']);
             if($approve_talent){
+                
                 self::send_ajax_success('Talent Approved');
             }
         } catch (\Throwable $th) {

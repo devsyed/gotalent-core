@@ -85,9 +85,10 @@ class GTTalentPostType {
 		$verified_talent = new WP_User_Query(array(
 			'role' => 'talent',
 			'meta_query' => array(
-				'relation' => 'OR',
+				'relation' => 'AND',
 				array(
 					'key'     => 'verified',
+					'value' => true,
 					'compare' => 'EXISTS'
 				),
 				array(
@@ -130,7 +131,7 @@ class GTTalentPostType {
 		$unverified_talent = new WP_User_Query(array(
 			'role' => 'talent',
 			'meta_query' => array(
-				'relation' => 'OR',
+				'relation' => 'AND',
 				array(
 					'key'     => 'verified',
 					'value'   => true,
@@ -152,6 +153,7 @@ class GTTalentPostType {
 		$user = get_user_by('id',$talent_id);
 		if($user){
 			update_user_meta($user->ID,'verified', true);
+			$mail = GTMailer::gt_send_mail($user->user_email, 'welcome@gotalent.global', 'GoTalent', 'Your Account has been Verified', 'emails/talent-account-verified.php');
 			return true;
 		}
 		return false;
@@ -166,6 +168,12 @@ class GTTalentPostType {
 	public static function gt_unset_as_spotlight($talent_id){
 		delete_user_meta($talent_id,'is_spotlight_talent', 'yes');
 		return true;
+	}
+
+
+	public static function get_searched_talent()
+	{
+		
 	}
 
 

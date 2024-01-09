@@ -1,6 +1,6 @@
 <?php $package = $variables;
 ?>
-<div class="col-4 pricing-box mb-2">
+<div class="col-3 pricing-box mb-2">
     <div class="group-tag">
         <div class="tag1"><?php echo $package['post_title']; ?></div>
     </div>
@@ -18,5 +18,9 @@
         </li>
 
     </ul>
-    <a href="/buy-package?query_id=<?php echo $package['ID'] ?>" class="btn">Buy Package</a>
+    <?php if(!is_user_logged_in()): ?>
+        <button class="btn-gt-default" data-bs-toggle="modal" data-bs-target="#registration-modal"><?php echo __('Login/Register','gotalent'); ?></button>
+    <?php else: ?>
+        <a href="/buy-package?query_id=<?php echo $package['ID'] ?>" class="btn">Buy Package</a>
+    <?php endif; ?>
 </div>
