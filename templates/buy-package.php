@@ -2,15 +2,29 @@
 if (!is_user_logged_in()) {
     wp_safe_redirect('/#registration_modal');
 }
-$package_id = $_GET['query_id'];
-$package = get_post($package_id);
-if (!$package) wp_safe_redirect('/talent');
-$talent = get_user_by('id', get_post_meta($package_id, 'talent_id', true));
-$is_talent_viewing = ($talent->ID === get_current_user_id()) ? true : false;
-
 get_header();
-GTThemeHelper::show_breadcrumb('Complete Your Booking with ' . $talent->first_name . ' ' . $talent->last_name, 'Your Selected Package: ' . $package->post_title);
-$package_price = get_post_meta($package_id, 'price', true);
+$package_id = isset($_GET['query_id']) ? (int)$_GET['query_id'] : 0;
+$custom_quote = isset($_GET['custom_quote']) ? $_GET['custom_quote'] : false;
+$talent_id = isset($_GET['talent_id']) ? $_GET['talent_id'] : false;
+$is_it_package = ($package_id !== 0 && !($custom_quote)) ? true : false;
+
+if($package_id !== 0){
+    $package = get_post($package_id);
+    if (!$package) wp_safe_redirect('/talent');
+    $talent = get_user_by('id', get_post_meta($package_id, 'talent_id', true));
+    $is_talent_viewing = ($talent->ID === get_current_user_id()) ? true : false;
+    GTThemeHelper::show_breadcrumb('Complete Your Booking with ' . $talent->first_name . ' ' . $talent->last_name, 'Your Selected Package: ' . $package->post_title);
+
+    $package_price = get_post_meta($package_id, 'price', true);
+}
+if($talent_id){
+    $talent = get_user_by('id',$talent_id);
+    $is_talent_viewing = ($talent->ID === get_current_user_id()) ? true : false;
+    if($custom_quote){
+        GTThemeHelper::show_breadcrumb('Complete Your Booking with ' . $talent->display_name . ' ' . $talent->last_name, 'Your Custom Quote: AED ' . $custom_quote );
+    }
+}
+
 ?>
 <div class="wrapper-buy-package">
     <div class="container-fluid mt-5 py-5">
@@ -153,16 +167,28 @@ $package_price = get_post_meta($package_id, 'price', true);
                                             <strong>Time of Event</strong>
                                             <p id="start_time"></p>
                                         </div>
+                                        <?php if($is_it_package) : ?>
                                         <div class="booking-info-single">
                                             <strong>Selected Package</strong>
                                             <p><?php echo $package->post_title; ?></p>
                                         </div>
+                                        <?php endif; ?>
                                         <div class="gt-form-control">
-                                            <p class="d-flex justify-content-between mt-3 align-item-center">
-                                                <span class="d-flex flex-column justify-content-start"><strong>Total Amount:
-                                                    </strong></span>
-                                                <span class="text-lg pricing" data-hourly-rate="100">AED <?php echo $package_price ?></span>
-                                            </p>
+                                            <?php if($is_it_package): ?>
+                                                <p class="d-flex justify-content-between mt-3 align-item-center">
+                                                    <span class="d-flex flex-column justify-content-start"><strong>Total Amount:
+                                                        </strong></span>
+                                                    <span class="text-lg pricing" data-hourly-rate="100">AED <?php echo $package_price ?></span>
+                                                </p>
+                                            <?php else: ?>
+                                                <input type="hidden" name="booking_type" value="custom_quote"/>
+                                                <input type="hidden" name="custom_quote_amount" value="<?php echo $custom_quote; ?>">
+                                                <p class="d-flex justify-content-between mt-3 align-item-center">
+                                                    <span class="d-flex flex-column justify-content-start"><strong>Total Amount:
+                                                        </strong></span>
+                                                    <span class="text-lg pricing">AED <?php echo $custom_quote ?></span>
+                                                </p>
+                                            <?php endif; ?>
                                             <div class="d-flex justify-content-center align-items-center">
                                                 <button type="submit" class="gt-send-query w-50">Send Invitation</button>
                                             </div>

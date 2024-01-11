@@ -119,6 +119,10 @@ class GTInvitationPostType {
 
 		$invitation_id = wp_insert_post($booking_data);
 		do_action('gt_invitation_created',$meta['talent_id'], $invitation_id, $meta['recruiter_id']);
+		$talent = get_user_by('id', $meta['talent_id']);
+		if(!$talent) return;
+		
+		$mail_to_talent = GTMailer::gt_send_mail($talent->user_email,'bookings@gotalent.global','GoTalent', 'You have a new invitation.', 'emails/talent-new-invitation.php', array('meta' => $meta));
 
 		if ($invitation_id && !is_wp_error($invitation_id)) {
 			foreach ($meta as $key => $value) {

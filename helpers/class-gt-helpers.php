@@ -81,4 +81,11 @@ class GTHelpers
         $verify_nonce = wp_verify_nonce($string,$action);
         return $verify_nonce;
     }
+
+    public static function slugify($text) {
+        $text = str_replace(' ', '-', $text);
+        $text = preg_replace('/[^A-Za-z0-9\-]/', '', $text);
+        $text = strtolower($text);
+        return $text;
+    }
 }

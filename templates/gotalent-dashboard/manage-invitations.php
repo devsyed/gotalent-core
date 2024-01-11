@@ -13,7 +13,7 @@ $invitations = GTInvitationPostType::gt_get_invitations_by_talent_id(get_current
                                 <th>#</th>
                                 <th>Event Type</th>
                                 <th>Recruiter</th>
-                                <th>Package/Hourly</th>
+                                <th>Package/Custom Quote</th>
                                 <th>Date</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -32,7 +32,7 @@ $invitations = GTInvitationPostType::gt_get_invitations_by_talent_id(get_current
                                         <?php 
                                         $booking_type = get_post_meta($invitation->ID,'booking_type', true);
                                         $package_id = ($booking_type == 'package') ? get_post_meta($invitation->ID,'package_id', true) : false; 
-                                        echo ($package_id) ? 'Package' : 'Hourly';
+                                        echo ($package_id) ? 'Package' : 'Custom Quote';
                                         ?>
                                     </td>
                                     <td><?php echo $invitation->post_date; ?></td>

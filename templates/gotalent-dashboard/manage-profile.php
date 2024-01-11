@@ -236,7 +236,7 @@ $country = get_user_meta($user->ID,'country', true);
                                         'label' => 'Accept Custom Offers',
                                         'required' => false,
                                         'fieldset_class' => 'gt-flex',
-                                        'value' => 'accept_custom_offers',
+                                        'value' => 'yes',
                                         'default' => $accept_custom_offers,
                                     )
                                 ))
@@ -267,6 +267,12 @@ $country = get_user_meta($user->ID,'country', true);
             <div class="save-form-wrapper">
                 <a href="/author/<?php echo $user->user_nicename; ?>"><?php echo __('View Your Profile', 'gotalent-core'); ?></a>
                 <button type="submit" class="ms-3 btn-gt-default"><?php echo __('Save Profile Settings', 'gotalent-core'); ?></button>
+                
+                <script>
+                    window.onbeforeunload = function() {
+                        return "Are you sure you want to leave? Your changes may not be saved.";
+                    };
+                </script>
             </div>
         </form>
     </div>

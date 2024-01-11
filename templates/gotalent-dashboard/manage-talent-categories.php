@@ -4,11 +4,11 @@ $all_catgories = GTTaxonomy_Talent_Category::gt_get_all_talent_categories();
 <div class="add-new-button">
     <a href="/gotalent-dashboard/manage-talent-categories?add_new"><?php echo __('Add New', 'gotalent-core'); ?></a>
 </div>
+
 <section class="flat-dashboard-setting">
     <div class="themes-container">
         <div class="row">
             <div class="col-lg-12 col-md-12 ">
-            
                 <div class="profile-setting bg-white">
                 <table id="myTable">
                         <thead>

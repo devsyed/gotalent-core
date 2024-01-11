@@ -68,6 +68,12 @@
                         <div class="save-form-wrapper">
                             <button type="submit" class="btn-gt-default"><?php echo __('Save Settings', 'gotalent-core'); ?></button>
                         </div>
+
+                        <script>
+                    window.onbeforeunload = function() {
+                        return "Are you sure you want to leave? Your changes may not be saved.";
+                    };
+                </script>
                     </form>
                 </div>
 

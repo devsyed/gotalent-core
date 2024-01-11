@@ -13,13 +13,19 @@ $recruiter = get_user_by('id', get_post_meta($invitation_id,'recruiter_id', true
                 <div class="profile-setting bg-white">
                     <h3>Booking Invitation from: <?php echo $recruiter->first_name . ' ' . $recruiter->last_name ?></h3>
                     <ul class="booking-details mt-5">
+                        <li class="my-2"><strong>Event Type:
+                            </strong><?php echo get_post_meta($invitation_id,'event_type', true); ?></li>
                         <li class="my-2"><strong>Location of Event:
                             </strong><?php echo get_post_meta($invitation_id,'event_location', true); ?></li>
-                        <li class="my-2"><strong>Selected Package:</strong>
+                        <li class="my-2"><strong><?php echo (get_post_meta($invitation->ID, 'booking_type', true) == 'custom_quote' ) ? 'Custom Quote' : 'Package Selected'; ?></strong>
                             <?php 
                                 $booking_type = get_post_meta($invitation->ID,'booking_type', true);
                                 $package_id = ($booking_type == 'package') ? get_post_meta($invitation->ID,'package_id', true) : false; 
-                                echo get_post($package_id)->post_title;
+                                if($package_id){
+                                    echo get_post($package_id)->post_title;
+                                }else{
+                                    echo 'AED ' . get_post_meta($invitation->ID,'custom_quote_amount', true);
+                                }
                             ?>
                         </li>
                         <li class="my-2"><strong>Event Description:

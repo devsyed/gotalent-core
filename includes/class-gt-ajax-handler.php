@@ -9,6 +9,7 @@ class GTAjaxHandler
         'gotalent_authenticate_register', 
         'gotalent_generate_payment_link',
         'gotalent_talent_categories_add_new',
+        'gotalent_talent_categories_edit',
         'gotalent_get_talent_subcategories',
         'gotalent_user_process_meta',
         'gt_upload_images',
@@ -244,7 +245,7 @@ class GTAjaxHandler
     {
         try{
             parse_str($_POST['formData'],$data);
-            $title = 'Booking Request ';
+            $title = 'Invitation Request ';
             $invitation_created = GTInvitationPostType::gt_create_invitation_request($title,$data);
             if (is_wp_error($invitation_created)) {
                 self::send_ajax_error($invitation_created);
@@ -327,6 +328,24 @@ class GTAjaxHandler
             $talent_id = $data['talent_id'];
             $delete_id = update_user_meta($talent_id,'deleted_user', true);
             self::send_ajax_success($delete_id);
+        } catch (\Throwable $th) {
+            self::send_ajax_error($th);
+        }
+    }
+
+    public static function gotalent_talent_categories_edit()
+    {
+        try {
+            parse_str($_POST['formData'], $data);
+            $category_id = $data['category_id'];
+            $update = wp_update_term( $category_id, 'talent_category', array(
+                'name' => $data['category_name'],
+                'slug' => GTHelpers::slugify($data['category_name']),
+            ) );
+           if(is_wp_error($update)){
+            self::send_ajax_error($update->get_error_message());
+           }
+           self::send_ajax_success("Updated");
         } catch (\Throwable $th) {
             self::send_ajax_error($th);
         }

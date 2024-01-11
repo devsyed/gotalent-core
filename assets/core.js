@@ -37,17 +37,8 @@ jQuery(document).ready(function($){
         searching: true,
         paging: false,
     });
-    /** End Datatables  */
 
 
-    /** TinyMCE Editor */
-    tinymce.init({
-        selector: 'textarea.wysiwyg',
-        a_plugin_option: true,
-        a_configuration_option: 400
-    });
-    /** End TinyMCE Editor */
-    
     /** Ajax Function | Sends Data to Form Action URL ( through admin-ajax ) */
     $('.gt-form').on('submit', function(e) {
         e.preventDefault();
@@ -95,11 +86,6 @@ jQuery(document).ready(function($){
         })
     });
 
-
-    
-
-
-
     /**
      * Converts action url to ajax_action string 
      * eg: gotalent/authenticate/login ===> gotalent_authenticate_login
@@ -128,21 +114,6 @@ jQuery(document).ready(function($){
     function removeLoader(elem) {   
         $(elem).removeClass('processing');
     }
-
-
-
-    /** Generate Payment Link Button*/
-    // setTimeout(function(){
-    //     var target =  document.querySelector(".chat-footer"); 
-    //     if(!target) return;
-    //     var paymentLinkGenerator = document.createElement("button");
-    //     paymentLinkGenerator.classList.add("generate-payment-link");
-    //     paymentLinkGenerator.dataset.bsToggle = 'modal';
-    //     paymentLinkGenerator.dataset.bsTarget = '#generatePaymentLink';
-    //     paymentLinkGenerator.innerText = 'Generate Payment Link'
-    //     target.appendChild(paymentLinkGenerator)
-        
-    // },1000) 
 
 
     /** Get Subcategories based on Category | Dashboard */
@@ -196,8 +167,6 @@ jQuery(document).ready(function($){
     })
 
 
-    
-
     $(document).on("click", ".remove_portfolio_item", function(e){
         e.preventDefault();
         Swal.fire({
@@ -213,9 +182,9 @@ jQuery(document).ready(function($){
         })
     })
 
-
-
     $(".datepicker").datepicker();
+
+
 
     
     
