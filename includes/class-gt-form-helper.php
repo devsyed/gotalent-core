@@ -41,7 +41,7 @@ class GTFormHelper
                         }
                         break;
                     case 'date':
-                        echo '<input type="text" class="form-control datepicker"/>';
+                        echo '<input type="text" class="form-control datepicker" name="'.$name.'"/>';
                         break;
     
                     case 'radio':
@@ -86,8 +86,6 @@ class GTFormHelper
                 $default_checked = (isset($field['default']) && $field['default'] == true) ? 'checked' : '';
                 $info = (isset($field['info'])) ? $field['info'] : '';
 
-
-    
                 echo '<fieldset class="'.$fieldset_class.'">';
     
                 if($type !== 'file'){
@@ -103,7 +101,6 @@ class GTFormHelper
                     case 'password':
                     case 'email':
                     case 'url':
-                    
                     case 'number':
                         echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . ' value="'.$value.'">
                         <p class="info-field">'.$info.'</p>
@@ -157,6 +154,7 @@ class GTFormHelper
                       break;
 
                     case 'file':
+                        echo '<p class="mb-4"> Upload upto '. $field['max_upload'] .' files. </p>';
                         echo '<div 
                         id="'.$field['name'].'" 
                         data-max-upload="'.$field['max_upload'].'" 

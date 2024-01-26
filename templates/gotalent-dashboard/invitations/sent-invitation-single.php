@@ -18,8 +18,12 @@ $recruiter = get_user_by('id', get_post_meta($invitation_id,'recruiter_id', true
                         <li class="my-2"><strong>Selected Package:</strong>
                             <?php 
                                 $booking_type = get_post_meta($invitation->ID,'booking_type', true);
-                                $package_id = ($booking_type == 'package') ? get_post_meta($invitation->ID,'package_id', true) : false; 
-                                echo get_post($package_id)->post_title;
+                                if($booking_type == 'package'){
+                                    $package_id = get_post_meta($invitation->ID,'package_id', true);
+                                    echo get_post($package_id)->post_title;
+                                }else{
+                                    echo get_post_meta($invitation->ID,'custom_quote_amount', true);
+                                }
                             ?>
                         </li>
                         <li class="my-2"><strong>Event Description:
@@ -30,6 +34,8 @@ $recruiter = get_user_by('id', get_post_meta($invitation_id,'recruiter_id', true
                             </strong><?php echo get_post_meta($invitation_id,'total_number_of_guests', true); ?> </li>
                         <li class="my-2"><strong>Total Duration Required:
                             </strong><?php echo get_post_meta($invitation_id,'duration', true); ?> </li>
+                        <li class="my-2"><strong>Event Date
+                            </strong><?php echo get_post_meta($invitation_id,'start_date', true); ?> </li>
                         <li class="my-2"><strong>Start Time
                             </strong><?php echo get_post_meta($invitation_id,'start_time', true); ?> </li>
                     </ul>

@@ -87,6 +87,18 @@ class GTInvitationPostType {
 		return $invitations->posts;
 	}
 
+	public static function gt_get_all_invitations()
+	{
+		$args = array(
+			'post_type' => 'invitation',
+			'post_status' => 'private',
+			'orderby' => 'date',
+			'order' => 'DESC'
+		);
+		$invitations = new WP_Query($args);
+		return $invitations->posts;
+	}
+
 	public static function gt_get_invitations_by_recruiter_id($recruiter_id)
 	{
 		$args = array(
@@ -136,6 +148,9 @@ class GTInvitationPostType {
 
 	public static function gt_invitation_belongs_to_talent($talent_id, $invitation_id)
 	{
+		if(current_user_can('can_manage_recruiter_and_talent')){
+			return true;
+		}
 		$talent_invitations = self::gt_get_invitations_by_talent_id($talent_id);
 		
 		$invitation_belongs_to_talent = array_reduce($talent_invitations, function ($carry, $post) use ($invitation_id) {
@@ -186,6 +201,29 @@ class GTInvitationPostType {
 		return $invitation_id;
 
 
+	}
+
+	public static function count_unresponded_invitations($talent_id)
+	{
+		$args = array(
+			'post_type' => 'invitation',
+			'post_status' => 'private',
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key' => 'talent_id',
+					'value' => $talent_id,
+					'compare' => '='
+				),
+				array(
+					'key' => 'invitation_status',
+					'value' => 'pending',
+					'compare' => '='
+				),
+			),
+		);
+		$invitations = new WP_Query($args);
+		return $invitations->post_count;
 	}
 
 }

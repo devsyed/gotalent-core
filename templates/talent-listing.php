@@ -1,4 +1,5 @@
-<?php $talent = GTTalentPostType::gt_get_verified_talent();?>
+<?php $talent = GTTalentPostType::get_searched_talent($_GET);
+?>
 <section class="candidates-section">
   <div class="tf-container">
     <div class="row">
@@ -11,18 +12,7 @@
                 <span><?php echo count($talent); ?></span> Talent recommended for you
               </p>
             </div>
-            <div class="group-select">
-              <select>
-                <option>12 Per Page</option>
-                <option>1 Per Page</option>
-                <option>10 Per Page</option>
-              </select>
-              <select>
-                <option>Sort by (Defaut)</option>
-                <option>New</option>
-                <option>Last</option>
-              </select>
-            </div>
+
           </div>
         </div>
 

@@ -9,18 +9,18 @@ $searched_keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 <section class="form-sticky stc2">
     <div class="tf-container">
         <div class="candidate-form job-search-form inner-form-map style2">
-            <form method="POST">
+            <form method="GET">
                 <div class="row-group-search">
                 <?php GTFormHelper::generate_dashboard_form_fields(array(
                             array(
                                 'type' => 'text', 
-                                'name' => 'keyword',
+                                'name' => 'talent_keyword',
                                 'label' => 'Keyword',
                                 'value' => $searched_keyword
                             ),
                             array(
                                 'type' => 'select',
-                                'name' => '_meta_talent_category',
+                                'name' => 'cat_slug',
                                 'label' => 'Select Category',
                                 'required' => false,
                                 'options' => $talent_categories,
@@ -28,7 +28,7 @@ $searched_keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
                             ),
                             array(
                                 'type' => 'select',
-                                'name' => '_meta_talent_sub_category',
+                                'name' => 'sub_cat_slug',
                                 'label' => 'Select Sub Category',
                                 'required' => false,
                                 'onchange' => 'gt_get_subcategories',
@@ -37,7 +37,7 @@ $searched_keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
                             ),
                         )) ?>
                     <div class="form-group-btn mt-3">
-                        <button class="btn-gt-default"><?php echo __('Filter Candidates', 'gotalent-core'); ?></button>
+                        <button type="submit" class="btn-gt-default" id="filterCandidates"><?php echo __('Filter Candidates', 'gotalent-core'); ?></button>
                     </div>
                 </div>
             </form>

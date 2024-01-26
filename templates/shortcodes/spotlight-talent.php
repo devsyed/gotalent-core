@@ -18,4 +18,6 @@ $all_spotlight_talent = GTSpotlightHandler::gt_get_all_spotlight_talent(); ?>
         <?php endforeach;
         endif; ?>
     </div>
+    <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
 </div>

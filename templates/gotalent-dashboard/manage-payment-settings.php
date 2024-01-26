@@ -57,6 +57,11 @@ $iban_number = get_user_meta(get_current_user_id(), 'iban_number', true);
 
                             <button type="submit" class="ms-3 btn-gt-default"><?php echo __('Save Payment Settings', 'gotalent-core'); ?></button>
                         </div>
+                        <script>
+                    window.onbeforeunload = function() {
+                        return "Are you sure you want to leave? Your changes may not be saved.";
+                    };
+                </script>
                     </form>
                 </div>
 

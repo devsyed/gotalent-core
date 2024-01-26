@@ -159,21 +159,59 @@ class GTTalentPostType {
 		return false;
 	}
 
-	public static function gt_set_as_spotlight($talent_id){
+	public static function gt_set_as_spotlight($talent_id)
+	{
 		update_user_meta($talent_id,'is_spotlight_talent', 'yes');
 		return true;
 	}
 	
 	
-	public static function gt_unset_as_spotlight($talent_id){
+	public static function gt_unset_as_spotlight($talent_id)
+	{
 		delete_user_meta($talent_id,'is_spotlight_talent', 'yes');
 		return true;
 	}
 
 
-	public static function get_searched_talent()
+	public static function get_searched_talent($query = array())
 	{
+		$build_query = array(
+			'relation' => 'AND',
+			array(
+				'key'     => 'verified',
+				'value' => true,
+				'compare' => 'EXISTS'
+			),
+			array(
+				'key' => 'deleted_user',
+				'compare' => 'NOT EXISTS'
+			),
+			
+		);
+		if(isset($query['cat_slug'])){
+			$build_query[] = array(
+				'key' => 'talent_category',
+				'value' => $query['cat_slug'],
+				'compare' => '='
+			);
+		}
 		
+		if(isset($query['sub_cat_slug'])){
+			$build_query[] = array(
+				'key' => 'talent_sub_category',
+				'value' => $query['sub_cat_slug'],
+				'compare' => '='
+			);
+		}
+
+		$verified_talent = new WP_User_Query(array(
+			'role' => 'talent',
+			'meta_query' => $build_query
+		));
+
+		$results = $verified_talent->get_results();
+		return $results;
+
 	}
 
 

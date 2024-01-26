@@ -58,7 +58,7 @@ class GTTemplateLoader
                 'single_page' => 'gotalent-dashboard/packages/single'
             ),
             'gotalent-dashboard/manage-invitations' => array(
-                'allowed_capabilities' => array('can_be_hired'),
+                'allowed_capabilities' => array('can_be_hired', 'can_manage_recruiter_and_talent'),
                 'single_page' => 'gotalent-dashboard/invitations/single'
             ),
             'gotalent-dashboard/manage-media' => array(

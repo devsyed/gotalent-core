@@ -1,6 +1,6 @@
 <?php $package = $variables;
 ?>
-<div class="col-3 pricing-box mb-2">
+<div class="col-3 pricing-box mb-2 me-2">
     <div class="group-tag">
         <div class="tag1"><?php echo $package['post_title']; ?></div>
     </div>
@@ -12,7 +12,6 @@
         </strong><?php echo get_post_meta($package['ID'],'number_of_sets', true); ?></li>
         <li><strong>Duration: </strong><?php echo get_post_meta($package['ID'],'duration', true); ?></li>
         <li><strong>Inlcudes: </strong><?php echo get_post_meta($package['ID'],'includes', true); ?></li>
-        <li><strong>Excludes: </strong><?php echo get_post_meta($package['ID'],'excludes', true); ?></li>
         <li><strong>Excludes: </strong><?php echo get_post_meta($package['ID'],'excludes', true); ?></li>
         <li><strong>Description: </strong><?php echo get_post_meta($package['ID'],'description', true); ?>
         </li>

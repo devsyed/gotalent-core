@@ -60,7 +60,11 @@
                         <div class="save-form-wrapper">
                             <button class="btn-gt-default" type="submit"><?php echo __('Create Package', 'gotalent-core') ?></button>
                         </div>
-                       
+                        <script>
+                    window.onbeforeunload = function() {
+                        return "Are you sure you want to leave? Your changes may not be saved.";
+                    };
+                </script>
                     </form>
                 </div>
             </div>

@@ -1,6 +1,13 @@
 
 <?php GTThemeHelper::gt_get_header('header-dashboard');
-$invitations = GTInvitationPostType::gt_get_invitations_by_talent_id(get_current_user_id());
+$invitations = [];
+if (current_user_can('can_be_hired')) {
+    $invitations = GTInvitationPostType::gt_get_invitations_by_talent_id(get_current_user_id());
+}
+if (current_user_can('can_manage_recruiter_and_talent')) {
+    $invitations = GTInvitationPostType::gt_get_all_invitations();
+}
+
 ?>
 <section class="flat-dashboard-setting">
     <div class="themes-container">

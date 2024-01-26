@@ -25,7 +25,26 @@ class GTAuthentication
 
     public static function gt_register_user($user_details)
     {
+
+
         $required_fields = array('first_name', 'last_name', 'email_address', 'password', 'apply_as', 'phone_number');
+
+
+        $meta_query = array(
+            array(
+                'key'     => 'phone_number',
+                'value'   => $user_details['phone_number'],
+                'compare' => '=',
+            ),
+        );
+
+        $users = get_users(array(
+            'meta_query' => $meta_query,
+        ));
+
+        if(!empty($users)){
+            return new WP_Error('user-exists', 'User with this Phone Number already exists.' );
+        }
 
         foreach ($required_fields as $field) {
             if (!isset($user_details[$field]) || $user_details[$field] == '') {
@@ -40,6 +59,23 @@ class GTAuthentication
         if (email_exists($user_details['email_address'])) {
             return new WP_Error('user-exists', 'User with this email already exists. Try logging in.');
         }   
+
+
+        $meta_key = 'your_meta_key';
+        $meta_value = 'desired_meta_value';
+
+        // Define the meta query
+        $meta_query = array(
+            array(
+                'key'     => $meta_key,
+                'value'   => $meta_value,
+                'compare' => '=',
+            ),
+        );
+
+        $users = get_users(array(
+            'meta_query' => $meta_query,
+        ));
 
         $user_data = [
             'first_name' => $user_details['first_name'],

@@ -51,7 +51,7 @@ if($talent_id){
                                             'name' => 'event_type',
                                             'required' => true,
                                             'label' => 'Event Type',
-                                            'options' => array('Hotels & Restaurant'=>'Hotels & Restaurant','Clubs & Pubs' => 'Clubs & Pubs','Wedding' => 'Wedding'),
+                                            'options' => array('Hotels & Restaurant'=>'Hotels & Restaurant','Clubs & Pubs' => 'Clubs & Pubs','Wedding' => 'Wedding','Festivals' => 'Festivals', 'Public Event' => 'Public Event','Cruise ship' => 'Cruise ship', 'Corporate event' => 'Corporate event', 'Corporate event' => 'Corporate event', 'Private Party' => 'Private Party', 'Bachelor Party' => 'Bachelor Party','Exhibition ' => 'Exhibition'),
                                         ),
                                         array(
                                             'type' => 'select',
@@ -112,7 +112,7 @@ if($talent_id){
                                     GTFormHelper::generate_form_fields(array(
                                         array(
                                             'type' => 'date',
-                                            'name' => 'date_time',
+                                            'name' => 'start_date',
                                             'required' => true,
                                             'label' => 'When is your event?',
                                             'placeholder' => '',
@@ -134,7 +134,7 @@ if($talent_id){
                                             'type' => 'number',
                                             'name' => 'duration',
                                             'required' => true,
-                                            'label' => 'How long do you need the talent for?',
+                                            'label' => 'How long do you need the talent for? ( In Hours ) ',
                                             'placeholder' => '',
                                             'div_width' => '50'
                                         ),

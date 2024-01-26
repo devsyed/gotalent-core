@@ -82,9 +82,18 @@ class GTHelpers
         return $verify_nonce;
     }
 
-    public static function slugify($text) {
+    public static function slugify($text)
+    {
         $text = str_replace(' ', '-', $text);
         $text = preg_replace('/[^A-Za-z0-9\-]/', '', $text);
+        $text = strtolower($text);
+        return $text;
+    }
+    
+    public static function slugify_alt($text)
+    {
+        $text = str_replace(' ', '_', $text);
+        $text = preg_replace('/[^A-Za-z0-9_\-]/', '', $text);
         $text = strtolower($text);
         return $text;
     }

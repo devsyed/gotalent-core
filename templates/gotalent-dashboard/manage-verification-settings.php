@@ -19,14 +19,6 @@
                                 'input_id' => '_meta_proof_one',
                                 'message' => 'Passport Copy'
                             ),
-                            array(
-                                'type' => 'file',
-                                'name' => 'cover-image-uploader',
-                                'action' => 'gt_upload_images',
-                                'max_upload' => 1,
-                                'input_id' => '_meta_proof_two',
-                                'message' => 'ID Copy'
-                            ),
                         ))
                     ?>
                     </div>

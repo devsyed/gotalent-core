@@ -34,6 +34,12 @@ class GTThemeHelper
          add_action('wp_head', array(__CLASS__,'gt_show_verification_alert'));
 
 
+         /** Badges for Sidebar Links */
+         add_action('sidebar_link_gotalent-dashboardmanage-invitations', function(){
+            if(current_user_can('can_be_hired')){
+                echo GTInvitationPostType::count_unresponded_invitations(get_current_user_id());
+            }
+         });
     
     }
 
@@ -116,8 +122,8 @@ class GTThemeHelper
     {
         $sidebar_links = [
             'gotalent-dashboard/manage-profile' => __('Manage Profile', 'gotalent-core'),
-            'gotalent-dashboard/manage-invitations' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/manage-bookings' => __('Manage Bookings', 'gotalent-core'),
+            'gotalent-dashboard/manage-invitations' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/invitations-sent' => __('Manage Invitations', 'gotalent-core'),
             'gotalent-dashboard/manage-availability' => __('Manage Availability', 'gotalent-core'),
             'gotalent-dashboard/manage-talent' => __('Manage Talent', 'gotalent-core'),
@@ -171,7 +177,7 @@ class GTThemeHelper
                     unset($sidebar_links['gotalent-dashboard/manage-profile']);
                     unset($sidebar_links['gotalent-dashboard/manage-packages']);
                     unset($sidebar_links['gotalent-dashboard/manage-media']);
-                    unset($sidebar_links['gotalent-dashboard/manage-invitations']);
+
                     unset($sidebar_links['gotalent-dashboard/invitations-sent']);
                     
                     break;

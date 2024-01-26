@@ -99,7 +99,8 @@
                                         'name' => 'password',
                                         'label' => 'Password',
                                         'required' => true,
-                                        'id' => 'password_strength'
+                                        'id' => 'password_strength',
+                                        'info' => 'Your password must contain atleast one uppercase, one special character and one number'
                                     ),
                                     
                                 ));
@@ -117,10 +118,13 @@
                                     'checked' => 'recruiter',
                                 ),
                             )); ?>
-                            
 
-
-
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="accept_terms_conditions" id="defaultCheck1" required>
+                            <label class="form-check-label ms-2" for="defaultCheck1">
+                               I accept terms and conditions.
+                            </label>
+                            </div>
                             <button type="submit" class="btn-gt-default"><?php echo __('Create Account', 'gotalent-core'); ?></button>
                             <?php wp_nonce_field( 'gotalent_register', 'gotalent_register_nonce' ); ?>
                         </form>

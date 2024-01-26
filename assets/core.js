@@ -117,9 +117,9 @@ jQuery(document).ready(function($){
 
 
     /** Get Subcategories based on Category | Dashboard */
-    $("select[name='_meta_talent_category']").trigger("change");
-    $("select[name='_meta_talent_category']").on("change", function(e){
-        var target = $("select[name='_meta_talent_sub_category']");
+    $("select[name='talent_category']").trigger("change");
+    $("select[name='talent_category']").on("change", function(e){
+        var target = $("select[name='talent_sub_category']");
         $(target).html('');
         $.ajax({
             url:gotalent_ajax.ajax_url + `?action=gotalent_get_talent_subcategories&parent_id=${e.target.value}`,
@@ -182,7 +182,16 @@ jQuery(document).ready(function($){
         })
     })
 
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker({
+        minDate: 0
+    });
+
+
+
+    /** Filter Candidates */
+    $("#filterCandidates").on("click", function(){
+        var _this = this; 
+    })
 
 
 

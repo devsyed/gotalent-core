@@ -130,6 +130,8 @@ final class GoTalent {
         wp_enqueue_script('multistep-js',GOTALENT_PUBLIC_ASSETS . '/multi-step.js', array('jquery'), '1.0', true );
         wp_enqueue_script('gt-core-js',GOTALENT_PUBLIC_ASSETS . '/core.js', array('jquery','wp-tinymce','dropzone-js'), '1.0', true );
 
+        wp_enqueue_script('lightbox-gallery',GOTALENT_PUBLIC_ASSETS . '/lightgallery.min.js', array('jquery'), '1.0', true );
+
 
 
         wp_enqueue_style('dropzone-css',GOTALENT_PUBLIC_ASSETS . '/dropzone.css', array(), '1.0', 'all' );
@@ -140,6 +142,7 @@ final class GoTalent {
         wp_register_style( 'jquery-ui', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css' );
         wp_enqueue_style( 'jquery-ui' );  
         wp_enqueue_style('gt-core-css',GOTALENT_PUBLIC_ASSETS . '/core.css', array(), '1.0', 'all' );
+        wp_enqueue_style('lightbox-gallery',GOTALENT_PUBLIC_ASSETS . '/lightbox.min.css', array(), '1.0', 'all' );
 
         wp_localize_script('gt-core-js', 'gotalent_ajax', array(
             'ajax_url' => admin_url('admin-ajax.php'),
