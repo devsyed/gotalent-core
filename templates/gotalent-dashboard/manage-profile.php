@@ -23,7 +23,7 @@ $hourly_rate = get_user_meta($user->ID,'per_hour_rate', true);
 $talent_selected_category = get_user_meta($user->ID, 'talent_category', true);
 $talent_selected_subcategory = get_user_meta($user->ID, 'talent_sub_category', true);
 $talent_profession = get_user_meta($user->ID,'talent_profession', true);
-$talent_tags = get_user_meta($user->ID,'talent_tags', true) || [];
+$talent_tags = get_user_meta($user->ID,'talent_tags', true);
 $requirements = get_user_meta($user->ID,'requirement_for_performing', true);
 
 $talent_sub_categories_obj = GTTaxonomy_Talent_Category::gt_get_all_talent_categories($talent_selected_category);

@@ -14,7 +14,8 @@ class GTFormHelper
                 $label = isset($field['label']) ? $field['label'] : ucfirst($name); // Use the field name as the label if not specified
                 $required = isset($field['required']) && $field['required'] ? 'required' : '';
                 $div_width = (isset($field['div_width'])) ? $field['div_width'] : '100';
-    
+                $info = (isset($field['info'])) ? $field['info'] : '';
+                
                 echo '<div class="gt-form-control mb-3 w-'.$div_width.'">';
                 echo '<label for="' . $id . '" class="form-label m-0">' . $label . '</label>';
     
@@ -24,7 +25,10 @@ class GTFormHelper
                     case 'email':
                     case 'time':
                     case 'number':
-                        echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . '>';
+                        echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . '>
+                        <p class="info-field">'.$info.'</p>
+                        ';
+                        
                         break;
     
                     case 'textarea':

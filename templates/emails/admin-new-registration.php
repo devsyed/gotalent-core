@@ -148,41 +148,7 @@
               style="border-collapse: collapse;border: 0;margin: 0;padding: 0;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
               <table
                 style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                <tr>
-                  <td align="center" valign="middle" class="social"
-                    style="border-collapse: collapse;border: 0;margin: 0;padding: 10px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;text-align: center;">
-                    <table
-                      style="font-weight: normal;border-collapse: collapse;border: 0;margin: 0;padding: 0;font-family: Arial, sans-serif;">
-                      <tr>
-                        <td
-                          style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                          <a href="https://gotalent.global"><img
-                              src="https://info.tenable.com/rs/tenable/images/rss-teal.png"></a></td>
-                        <td
-                          style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                          <a href="https://gotalent.global"><img
-                              src="https://info.tenable.com/rs/tenable/images/twitter-teal.png"></a></td>
-                        <td
-                          style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                          <a href="https://gotalent.global"><img
-                              src="https://info.tenable.com/rs/tenable/images/facebook-teal.png"></a></td>
-                        <td
-                          style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                          <a href="https://gotalent.global"><img
-                              src="https://info.tenable.com/rs/tenable/images/youtube-teal.png"></a></td>
-                        <td
-                          style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                          <a href="https://gotalent.global"><img
-                              src="https://info.tenable.com/rs/tenable/images/linkedin-teal.png"></a></td>
-                        <td
-                          style="border-collapse: collapse;border: 0;margin: 0;padding: 5px;-webkit-text-size-adjust: none;color: #555559;font-family: Arial, sans-serif;font-size: 16px;line-height: 26px;">
-                          <a href="https://gotalent.global"><img
-                              src="https://info.tenable.com/rs/tenable/images/google-teal.png"></a></td>
-
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
+                <?php  GTThemeHelper::gt_get_footer('email-footer'); ?>
               </table>
             </td>
           </tr>
