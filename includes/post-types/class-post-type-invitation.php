@@ -176,9 +176,13 @@ class GTInvitationPostType {
 
 		$package_id = get_post_meta($invitation_id,'package_id', true);
 		$package = get_post($package_id);
-		$package_price = get_post_meta($package->ID,'price', true);
-		if(!$package) return;
-
+		$package_price = 0;
+		if($package){
+			$package_price = get_post_meta($package->ID,'price', true);
+		}else{
+			$package_price = get_post_meta($invitation_id,'custom_quote_amount', true);
+		}
+		
 		$thread_id = get_post_meta($invitation_id,'thread_id', true);
 
 		$talent_id = get_post_meta($invitation_id,'talent_id', true);
@@ -191,7 +195,7 @@ class GTInvitationPostType {
 		$recruiter_id = get_post_meta($invitation_id,'recruiter_id',true);
 
 		/** genreate payment link */
-		$booking_details = 'You are booking ' . $talent->display_name . ' for ' . $package->post_title . '.';
+		$booking_details = 'You are booking ' . $talent->display_name . ' for amount ' . $package_price . '.';
 		$payment_token = wp_create_nonce('invitation_id_' . $invitation_id); 
 		$payment_link = GTPaymentHandler::gt_create_payment_link($package_price, $booking_details, $invitation_id,$payment_token);
 
