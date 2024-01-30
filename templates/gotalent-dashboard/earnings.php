@@ -1,6 +1,10 @@
 <?php GTThemeHelper::gt_get_header('header-dashboard');
 $total_earned = GTBookingPostType::gt_get_earnings_for_user(get_current_user_id());
-$total_bookings_query = GTBookingPostType::gt_get_all_bookings();
+if(current_user_can('can_be_hired')){
+    $total_bookings_query = GTBookingPostType::get_all_bookings_for_talent(get_current_user_id());
+}else{
+    $total_bookings_query = GTBookingPostType::gt_get_all_bookings();
+}
 $total_bookings_count = $total_bookings_query->found_posts;
 
 $current_date = current_time('Y-m-d');
@@ -8,7 +12,11 @@ $one_month_ago = date('Y-m-d', strtotime('-1 month', strtotime($current_date)));
 
 $earnings_this_month = GTBookingPostType::gt_get_earnings_for_user(get_current_user_id(),array('start_date' => $one_month_ago, 'end_date' => $current_date));
 
-$bookings_this_month_query = GTBookingPostType::gt_get_all_bookings(array('start_date' => $one_month_ago, 'end_date' => $current_date));
+if(current_user_can('can_be_hired')){
+    $bookings_this_month_query = GTBookingPostType::get_all_bookings_for_talent(get_current_user_id(),array('start_date' => $one_month_ago, 'end_date' => $current_date));
+}else{
+    $bookings_this_month_query = GTBookingPostType::gt_get_all_bookings(array('start_date' => $one_month_ago, 'end_date' => $current_date));
+}
 $bookings_this_month_count = $bookings_this_month_query->found_posts;
 ?>
 <section class="flat-dashboard-setting">

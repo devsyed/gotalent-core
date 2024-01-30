@@ -159,6 +159,7 @@ class GTThemeHelper
                 break;
                 case 'talent':
                     unset($sidebar_links['gotalent-dashboard/manage-recruiters']);
+                    unset($sidebar_links['gotalent-dashboard/messages']);
                     unset($sidebar_links['gotalent-dashboard/manage-talent']);
                     unset($sidebar_links['gotalent-dashboard/manage-talent-categories']);
                     unset($sidebar_links['gotalent-dashboard/site-settings']);

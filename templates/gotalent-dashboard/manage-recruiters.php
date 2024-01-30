@@ -1,5 +1,7 @@
 
-<?php GTThemeHelper::gt_get_header('header-dashboard'); ?>
+<?php GTThemeHelper::gt_get_header('header-dashboard'); 
+$recruiters = GTRecruiterPostType::gt_get_all_recruiters();
+?>
 <section class="flat-dashboard-setting">
     <div class="themes-container">
         <div class="row">
@@ -9,15 +11,19 @@
                         <thead>
                             <tr>
                             <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Full Name</th>
                                 <th>Email</th>
-                                <th>Hired Talents</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <?php if(!empty($recruiters)): foreach($recruiters as $recruiter): ?>
+                                <tr>
+                                    <td><?php echo $recruiter->display_name; ?></td>
+                                    <td><?php echo $recruiter->user_email; ?></td>
+                                    <td></td>
+                                </tr>
+                            <?php endforeach; endif; ?>
                         </tbody>
                     </table>
                 </div>

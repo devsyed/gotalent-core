@@ -44,8 +44,13 @@ if (current_user_can('can_manage_recruiter_and_talent')) {
                                 <td><strong>
                                         AED <?php
                                         $package = get_post(get_post_meta($booking->ID,'package_id',true));
-                                                    echo get_post_meta($package->ID, 'price', true);
-                                                    ?>
+                                        if($package){
+                                            echo get_post_meta($package->ID, 'price', true);
+                                                    
+                                        }else{
+                                            echo get_post_meta($booking->ID,'custom_quote_amount', true);
+                                        }
+                                        ?>
                                     </strong>
 
                                 </td>

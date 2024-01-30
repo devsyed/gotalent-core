@@ -5,7 +5,7 @@ $currentYear = date('Y');
   <div class="themes-container">
     <div class="row">
       <div class="col-lg-12 col-md-12 ">
-        <h5 class="center">©<?php echo $currentYear; ?> GoTalent. All Rights Reserved.</h5>
+        <h5 class="center">©<?php echo $currentYear; ?> GoTalent (Powered by The Only Dandy). All Rights Reserved.</h5>
       </div>
     </div>
   </div>

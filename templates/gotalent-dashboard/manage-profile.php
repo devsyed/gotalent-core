@@ -50,7 +50,7 @@ $country = get_user_meta($user->ID,'country', true);
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
                                 'input_id' => '_meta_profile_image_url',
-                                'message' => (get_user_meta(get_current_user_id(), 'profile_image_url', true)) ? 'Already Uploaded' : 'Upload Profile Image'
+                                'message' => (get_user_meta(get_current_user_id(), 'profile_image_url', true)) ? '<i class="fas fa-check"></i> &nbsp; Already Uploaded' : 'Upload Profile Image'
                             ),
                             array(
                                 'type' => 'file',
@@ -58,7 +58,7 @@ $country = get_user_meta($user->ID,'country', true);
                                 'action' => 'gt_upload_images',
                                 'max_upload' => 1,
                                 'input_id' => '_meta_cover_image_url',
-                                'message' => (get_user_meta(get_current_user_id(), 'cover_image_url', true)) ? 'Already Uploaded' : 'Upload Cover Image'
+                                'message' => (get_user_meta(get_current_user_id(), 'cover_image_url', true)) ? '<i class="fas fa-check"></i>&nbsp; Already Uploaded' : 'Upload Cover Image'
                             ),
                         ))
                         ?>

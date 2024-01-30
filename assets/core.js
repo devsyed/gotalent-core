@@ -194,6 +194,12 @@ jQuery(document).ready(function($){
     })
 
 
+    $(".clickable-div").on("click",function(){
+        var link = $(this).data('link');
+        window.location.href = link;
+    })
+
+
 
     
     

@@ -6,7 +6,7 @@ $invitation_id = (isset($_GET['invitation_id'])) ? $_GET['invitation_id'] : fals
 $invitation = get_post($invitation_id);
 $payment_token = (isset($_GET['payment_token'])) ? $_GET['payment_token'] : false;
 if(!$payment_token) wp_safe_redirect('/');
-$invitation_meta = array('thread_id','talent_id','recruiter_id','package_id','booking_type','event_type','event_location','event_location_address','total_number_of_guests','phone_number','event_description','start_time','duration','invitation_status','payment_link');
+$invitation_meta = array('thread_id','talent_id','recruiter_id','package_id','booking_type','event_type','event_location','event_location_address','total_number_of_guests','phone_number','event_description','start_time','duration','invitation_status','payment_link', 'custom_quote_amount');
 $meta = [];
 foreach($invitation_meta as $meta_info){
     $meta[$meta_info] = get_post_meta($invitation_id,$meta_info,true);

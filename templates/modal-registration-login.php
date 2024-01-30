@@ -122,7 +122,7 @@
                             <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="accept_terms_conditions" id="defaultCheck1" required>
                             <label class="form-check-label ms-2" for="defaultCheck1">
-                               I accept terms and conditions.
+                               I Accept the <a href="/terms-and-conditions">Terms & Conditions</a>
                             </label>
                             </div>
                             <button type="submit" class="btn-gt-default"><?php echo __('Create Account', 'gotalent-core'); ?></button>

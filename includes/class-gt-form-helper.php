@@ -23,14 +23,19 @@ class GTFormHelper
                     case 'text':
                     case 'password':
                     case 'email':
-                    case 'time':
+                    
                     case 'number':
                         echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . '>
                         <p class="info-field">'.$info.'</p>
                         ';
                         
                         break;
-    
+                    case 'time':
+                        echo '<input type="' . $type . '" id="' . $id . '" name="' . $name . '" class="form-control gt-time" ' . $required . ' onfocus="this.showPicker()">
+                        <p class="info-field">'.$info.'</p>
+                        ';
+                        
+                        break;
                     case 'textarea':
                         echo '<textarea id="' . $id . '" name="' . $name . '" class="form-control" ' . $required . '></textarea>';
                         break;

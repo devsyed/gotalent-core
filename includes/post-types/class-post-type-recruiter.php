@@ -65,6 +65,12 @@ class GTRecruiterPostType {
 	}
 
 
+	public static function gt_get_all_recruiters()
+	{
+		$recruiters = new WP_User_Query(array(
+			'role' => 'recruiter',
+		));
+	}
 
 	
 }

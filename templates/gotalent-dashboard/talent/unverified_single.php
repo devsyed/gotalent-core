@@ -99,15 +99,7 @@ $values_filtered = array_filter($values);
               </div>
 
 
-              <div class="wrap-icon">
-                <h4>Socials:</h4>
-                <div class="box-icon flex">
-                  <a href="<?php echo get_user_meta($talent->ID,'facebook_profile',true); ?>" class="icon-facebook"></a>
-                  <a href="<?php echo get_user_meta($talent->ID,'instagram_profile',true); ?>"
-                    class="icon-instagram1"></a>
-                  <a href="<?php echo get_user_meta($talent->ID,'youtube_profile',true); ?>" class="icon-youtube"></a>
-                </div>
-              </div>
+              
             </div>
           </div>
           <div class="post-about widget-dash-video bg-white">

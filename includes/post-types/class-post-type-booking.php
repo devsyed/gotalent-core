@@ -156,7 +156,7 @@ class GTBookingPostType
 	}
 	
 	
-	public static function get_all_bookings_for_talent($talent_id)
+	public static function get_all_bookings_for_talent($talent_id, $date = array())
 	{
 		$args = array(
 			'post_type' => 'booking',
@@ -169,9 +169,17 @@ class GTBookingPostType
 				),
 			),
 		);
+
+		if(!empty($date)){
+			$args['date_query'] = [
+				'after'     => $date['start_date'],
+				'before'    => $date['end_date'],
+				'inclusive' => true, 
+			];
+		}
 		
 		$bookings = new WP_Query($args);
-		return $bookings->posts;
+		return $bookings;
 	}
 
 	public static function gt_user_belongs_to_booking($booking_id)
@@ -223,10 +231,15 @@ class GTBookingPostType
 		if(!$bookings) return; 
 		foreach($bookings as $booking){
 			$package = get_post(get_post_meta($booking->ID,'package_id', true));
-			$total_earnings += (int) get_post_meta($package->ID, 'price', true) * $commission_rate;
+			if($package){
+				$total_earnings += (int) get_post_meta($package->ID, 'price', true) * $commission_rate;
+			}else{
+				$total_earnings += (int) get_post_meta($booking->ID, 'custom_quote_amount', true) * $commission_rate;
+			}
 		}
 		return $total_earnings;
 	}
+
 
 }
 

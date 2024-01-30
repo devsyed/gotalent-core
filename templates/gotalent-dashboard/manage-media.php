@@ -48,7 +48,7 @@ for($i = 0; $i < $allowed_videos_link; $i++){
                             'upload_directory' => get_user_meta(get_current_user_id(), 'secure_folder_name', true)
                         )
                         )); ?>
-                    <p class="mt-5 mb-2 text-bold">Please put in the Youtube Video ID here. </p>
+                    <p class="mt-5 mb-2 text-bold">Please put in the Youtube Video ID here. <br> <small> <strong>(The video ID will be located in the URL of the video page, right after the v= URL parameter. In this case, the URL of the video is: https://www.youtube.com/watch?v=aqz-KE-bpKQ. Therefore, the ID of the video is aqz-KE-bpKQ .)</strong></small></p>
                     <div class="gt-form-row">
                     <?php GTFormHelper::generate_dashboard_form_fields($fields) ?>
                 </div>
