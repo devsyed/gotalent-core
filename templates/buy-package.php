@@ -161,7 +161,7 @@ if($talent_id){
                                         </div>
                                         <div class="booking-info-single">
                                             <strong>Date of Event</strong>
-                                            <p id="date_time"></p>
+                                            <p id="start_date"></p>
                                         </div>
                                         <div class="booking-info-single">
                                             <strong>Time of Event</strong>
