@@ -136,6 +136,25 @@ jQuery(document).ready(function($){
             }
         })
     })
+    
+    $("select[name='cat_slug']").on("change", function(e){
+        var target = $("select[name='sub_cat_slug']");
+        $(target).html('');
+        $.ajax({
+            url:gotalent_ajax.ajax_url + `?action=gotalent_get_talent_subcategories&parent_id=${e.target.value}`,
+            method:"GET",
+            success:function(res){
+                var subcats = res.data.message;
+                $(subcats).each(function(index,val){
+                    $(target).append(`<option value="${val.term_id}">${val.name}</option>`)
+                })
+                $(target).niceSelect('update');
+            },
+            error:function(e){
+                console.log(e)
+            }
+        })
+    })
 
     var slider = document.querySelector(".gt-range");
     var output = document.querySelector(".gt-range-input");

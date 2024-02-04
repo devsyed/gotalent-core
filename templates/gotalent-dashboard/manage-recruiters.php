@@ -10,18 +10,22 @@ $recruiters = GTRecruiterPostType::gt_get_all_recruiters();
                     <table id="myTable">
                         <thead>
                             <tr>
-                            <th>#</th>
+                                <th>#</th>
                                 <th>Full Name</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if(!empty($recruiters)): foreach($recruiters as $recruiter): ?>
+                            <?php if(!empty($recruiters)): foreach($recruiters as $recruiter):  ?>
                                 <tr>
+                                    <td><?php echo $recruiter->ID; ?></td>
                                     <td><?php echo $recruiter->display_name; ?></td>
                                     <td><?php echo $recruiter->user_email; ?></td>
-                                    <td></td>
+                                    <td><form action="gotalent/recruiter/remove_recruiter" method="POST" class="gt-form">
+                                    <input type="hidden" name="recruiter_id" value="<?php echo $recruiter->ID ?>">    
+                                    <button type="submit" class="btn-gt-default">Remove Recruiter</button>
+                                </form></td>
                                 </tr>
                             <?php endforeach; endif; ?>
                         </tbody>

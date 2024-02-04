@@ -69,7 +69,16 @@ class GTRecruiterPostType {
 	{
 		$recruiters = new WP_User_Query(array(
 			'role' => 'recruiter',
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key' => 'deleted_user',
+					'compare' => 'NOT EXISTS'
+				)
+			)
 		));
+		$results = $recruiters->get_results();
+		return $results;
 	}
 
 	
