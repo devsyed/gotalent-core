@@ -1,4 +1,3 @@
-
 Dropzone.autoDiscover = false;
 jQuery(document).ready(function($){
     let dropzone; 

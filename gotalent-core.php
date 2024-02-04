@@ -27,7 +27,8 @@ final class GoTalent {
         $this->register_hooks();
     }
 
-    private function setup_constants() {
+    private function setup_constants()
+    {
         define('GOTALENT_VER', '1.0');
         define('GOTALENT', __FILE__);
         define('GOTALENT_CORE', plugin_dir_url(__FILE__));
@@ -113,8 +114,13 @@ final class GoTalent {
         require_once GOTALENT_PLUGIN_PATH . 'widgets/gt-include-elementor-widgets.php';
     }
 
-    private function register_hooks() {
+    private function register_hooks()
+    {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts_and_styles']);
+
+        add_action('wp_head', function(){
+            // $mail = GTMailer::gt_send_mail('9uiu7k023k@secretmail.net', 'welcome@gotalent.com', 'GoTalent', 'New Account Creation!', 'emails/admin-new-registration.php',array('invitation_id' => ''));
+        });
     }
 
     public function enqueue_scripts_and_styles() 

@@ -13,13 +13,15 @@ foreach($invitation_meta as $meta_info){
 }
 
 $package = get_post($meta['package_id']);
-$talent = get_post($meta['talent_id']);
+$talent = get_user_by('id', $meta['talent_id']);
+$recruiter = get_user_by('id', $meta['recruiter_id']);
 $verify_nonce = (wp_verify_nonce( $payment_token, "invitation_id_{$invitation_id}" )) ? 'yes' : 'no';
 if($invitation_id){
     update_post_meta($invitation_id,'payment_completed', true);
     update_post_meta($invitation_id,'invitation_status', 'booking_created');
     $title = 'You are booking ' . $talent->display_name . ' for ' . $package->post_title . '.';
-    GTBookingPostType::gt_create_booking($title,'',$meta);
+    $booking_id = GTBookingPostType::gt_create_booking($title,'',$meta);
+    do_action('gt_booking_created', $booking_id,$talent, $recruiter);
 }
 ?>
 <div class="tf-container my-5">

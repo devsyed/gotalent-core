@@ -201,6 +201,8 @@ class GTInvitationPostType {
 
 		update_post_meta($invitation_id,'payment_link', $payment_link);
 
+		do_action('gt_invitation_accepted',$talent_id, $invitation_id, $recruiter_id);
+
 		
 		return $invitation_id;
 

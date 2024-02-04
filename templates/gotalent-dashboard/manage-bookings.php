@@ -23,6 +23,9 @@ if (current_user_can('can_manage_recruiter_and_talent')) {
                                 <th>Description</th>
                                 <th><?php echo (current_user_can('can_hire_talent') || current_user_can('can_manage_recruiter_and_talent')) ? 'Talent' : 'Recruiter' ?>
                                 </th>
+                                <?php if(current_user_can('can_manage_recruiter_and_talent')): ?>
+                                    <th>Recruiter</th>
+                                <?php endif; ?>
                                 <?php echo (current_user_can('can_manage_recruiter_and_talent')) && '<th>Talent</th>'; ?>
                                 <th>Amount</th>
                                 <th>Date</th>
@@ -40,6 +43,12 @@ if (current_user_can('can_manage_recruiter_and_talent')) {
                                             $user = get_user_by('id', get_post_meta($booking->ID, $user_type . '_id', true));
                                             echo $user->first_name . ' ' . $user->last_name;
                                             ?></td>
+                                         <?php if(current_user_can('can_manage_recruiter_and_talent')): ?>
+                                    <td>
+                                        <?php $user = get_user_by('id', get_post_meta($booking->ID, 'recruiter_id', true));
+                                            echo $user->first_name . ' ' . $user->last_name;
+                                            ?><br><a href="mailto:<?php echo $user->user_email ?>"><?php echo $user->user_email ?></a></td>
+                                <?php endif; ?>
                                         <?php echo (current_user_can('can_manage_recruiter_and_talent')) && '<td>' . $user = get_user_by('id', get_post_meta($booking->ID, 'talent_id', true))->display_name . '</td>'; ?>
                                         <td><strong>
                                                 AED <?php

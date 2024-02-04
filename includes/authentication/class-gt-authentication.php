@@ -94,7 +94,7 @@ class GTAuthentication
             'post_status' => 'draft',
         ));
 
-        if($user_details['role'] == 'talent'){
+        if($user_details['apply_as'] == 'talent'){
             update_user_meta($user_id,'accept_custom_offers',true);
         }
         update_post_meta($talent_post_id,'linked_user_id' , $user_id);

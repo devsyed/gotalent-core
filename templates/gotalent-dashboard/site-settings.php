@@ -43,6 +43,12 @@
                                     'label' => 'Contact Number',
                                     'value' => get_option('contact_number'),
                                 ),
+                                array(
+                                    'type' => 'text',
+                                    'name' => 'gotalent_admin_email',
+                                    'label' => 'Admin Email Address <small>You will recieve all admin emails at this address</small>',
+                                    'value' => get_option('gotalent_admin_email'),
+                                ),
                             ))
                         ?>
                        </div>
