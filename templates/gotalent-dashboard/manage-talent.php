@@ -40,7 +40,7 @@ $results = GTTalentPostType::gt_get_verified_talent();
                                     <button class="btn-gt-default" type="submit">Remove From Spotlight Talent</button>
                                 </form>
                             <?php endif; ?></td>
-                            <td><a href="/author/<?php echo $user->user_nicename; ?>">View Talent Page</a></td>
+                            <td><a href="?query_id=<?php echo $talent->ID ?>">View Talent Details</a></td>
                             <td>
                                 <form action="gotalent/talent/remove_talent" method="POST" class="gt-form">
                                     <input type="hidden" name="talent_id" value="<?php echo $user->ID ?>">    

@@ -12,9 +12,11 @@ $recruiter = get_user_by('id', get_post_meta($invitation_id, 'recruiter_id', tru
         <div class="row">
             <div class="col-lg-12 col-md-12 ">
                 <div class="profile-setting bg-white">
-                    <h3 class="mb-2">Booking Invitation from: <?php echo $recruiter->first_name . ' ' . $recruiter->last_name ?></h3>
+                    <h3 class="mb-2">Recruiter: <?php echo $recruiter->first_name . ' ' . $recruiter->last_name ?></h3>
                     <?php if(current_user_can('can_manage_recruiter_and_talent')): ?>
-                    <h3>Booking For: <a href="<?php echo '/author/' . $talent->user_nicename ?>"><?php echo $talent->display_name; ?></a></h3>
+                        <h5>Recruiter Email: <a href="mailto:<?php echo $recruiter->user_email ?>"><?php echo $recruiter->user_email; ?></a></h5>
+                        <hr>
+                        <h3>Talent: <a href="<?php echo '/author/' . $talent->user_nicename ?>"><?php echo $talent->display_name; ?></a></h3>
                     <?php endif; ?>
                     <ul class="booking-details mt-5">
                         <li class="my-2"><strong>Event Type:

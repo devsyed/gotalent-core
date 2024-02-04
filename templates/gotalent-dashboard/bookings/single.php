@@ -3,6 +3,7 @@ $booking_id = $_GET['query_id'];
 $booking = GTbookingPostType::gt_get_booking($booking_id);
 GTThemeHelper::gt_get_header('header-dashboard');
 $recruiter = get_user_by('id', get_post_meta($booking_id,'recruiter_id', true));
+$booking_type = get_post_meta($booking->ID,'booking_type', true);
 ?>
 <section class="flat-dashboard-setting">
     <div class="themes-container">
@@ -13,11 +14,15 @@ $recruiter = get_user_by('id', get_post_meta($booking_id,'recruiter_id', true));
                     <ul class="booking-details mt-5">
                         <li class="my-2"><strong>Location of Event:
                             </strong><?php echo get_post_meta($booking_id,'event_location', true); ?></li>
-                        <li class="my-2"><strong>Selected Package:</strong>
+                        <li class="my-2"><strong><?php echo ($booking_type == 'custom_quote') ? 'Custom Quote Amount' : 'Selected Package' ?>:</strong>
                             <?php 
-                                $booking_type = get_post_meta($booking->ID,'booking_type', true);
+                                
                                 $package_id = ($booking_type == 'package') ? get_post_meta($booking->ID,'package_id', true) : false; 
-                                echo get_post($package_id)->post_title;
+                                if($package_id){
+                                    echo get_post($package_id)->post_title;
+                                }else{
+                                    echo get_post_meta($booking->ID, 'custom_quote_amount', true);
+                                }
                             ?>
                         </li>
                         <li class="my-2"><strong>Event Description:

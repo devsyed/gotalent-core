@@ -30,6 +30,7 @@ class GTTemplateLoader
             ),
             'gotalent-dashboard/manage-talent' => array(
                 'allowed_capabilities' => array('can_manage_recruiter_and_talent'),
+                'single_page' => 'gotalent-dashboard/talent/verified_single'
             ),
             'gotalent-dashboard/messages' => array(
                 'allowed_capabilities' => array('can_be_hired', 'can_hire_talent'),

@@ -12,6 +12,7 @@ $recruiters = GTRecruiterPostType::gt_get_all_recruiters();
                             <tr>
                                 <th>#</th>
                                 <th>Full Name</th>
+                                <th>Phone Number</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>
@@ -21,6 +22,7 @@ $recruiters = GTRecruiterPostType::gt_get_all_recruiters();
                                 <tr>
                                     <td><?php echo $recruiter->ID; ?></td>
                                     <td><?php echo $recruiter->display_name; ?></td>
+                                    <td><?php echo get_user_meta($recruiter->ID,'phone_number', true); ?></td>
                                     <td><?php echo $recruiter->user_email; ?></td>
                                     <td><form action="gotalent/recruiter/remove_recruiter" method="POST" class="gt-form">
                                     <input type="hidden" name="recruiter_id" value="<?php echo $recruiter->ID ?>">    
