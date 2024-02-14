@@ -43,7 +43,7 @@ if($talent_id){
                             <input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
                             <input type="hidden" name="booking_type" value="package">
                             <div class="step">
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="px-2 d-flex align-items-center gap-2 flex-wrap">
                                     <?php
                                     GTFormHelper::generate_form_fields(array(
                                         array(
@@ -72,7 +72,7 @@ if($talent_id){
                                     ))
                                     ?>
                                 </div>
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="px-2 d-flex align-items-center gap-2 flex-wrap">
                                     <?php
                                     GTFormHelper::generate_form_fields(array(
                                         array(
@@ -92,7 +92,7 @@ if($talent_id){
                                     ))
                                     ?>
                                 </div>
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="px-2 d-flex align-items-center gap-2 flex-wrap">
                                     <?php
                                     GTFormHelper::generate_form_fields(array(
                                         array(
@@ -107,7 +107,7 @@ if($talent_id){
                                 </div>
                             </div>
                             <div class="step">
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="px-2 d-flex align-items-center gap-2 flex-wrap">
                                     <?php
                                     GTFormHelper::generate_form_fields(array(
                                         array(
@@ -127,7 +127,7 @@ if($talent_id){
                                     ))
                                     ?>
                                 </div>
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="px-2 d-flex align-items-center gap-2 flex-wrap">
                                     <?php
                                     GTFormHelper::generate_form_fields(array(
                                         array(
@@ -145,7 +145,7 @@ if($talent_id){
                                 </div>
                             </div>
                             <div class="step">
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="px-2 d-flex align-items-center gap-2 flex-wrap">
                                     <div class="booking-summary w-100" data-content="Booking Summary">
                                         <div class="booking-info-single">
                                             <strong>Your Event Type:</strong>

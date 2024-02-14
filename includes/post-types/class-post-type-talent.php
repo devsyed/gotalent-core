@@ -204,6 +204,15 @@ class GTTalentPostType {
 			);
 		}
 
+		if(isset($query['talent_keyword'])){
+			$build_query[] = array(
+				'key'     => 'talent_tags',
+				'value'   => $query['talent_keyword'],
+				'compare' => 'LIKE',
+				'compare_key' => 'RLIKE', // Using RLIKE (REGEXP) for more flexibility
+			);
+		}
+
 		$verified_talent = new WP_User_Query(array(
 			'role' => 'talent',
 			'meta_query' => $build_query
