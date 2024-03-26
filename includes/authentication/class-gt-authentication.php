@@ -15,7 +15,7 @@ class GTAuthentication
         ),false);
 
         if (is_wp_error($user_id)) {
-            echo $user_id->get_error_message();
+            return new WP_Error(403,$user_id->get_error_message()); 
         } else {
             wp_set_auth_cookie($user_id->ID, true);
         }

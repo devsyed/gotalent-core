@@ -55,15 +55,14 @@ jQuery(document).ready(function($){
                 formData: $(this).serialize(),
             },
             success:function(res){
-                console.log(res)
                 setTimeout(function(){
                     removeLoader(button)
                 },1000)
-                if(res.data.code == 0){
+                if(res?.data?.code == 0){
                     $(form).siblings('.error-form').html(res?.data?.message)
                     $(form).siblings('.error-form').show();
                 }
-                if (res.data.code === 1) {
+                if (res?.data?.code === 1) {
                     var successCallback = $(form).data('success-callback');
                     if (typeof window[successCallback] === 'function') {
                         window[successCallback](res.data.message); 
@@ -80,7 +79,8 @@ jQuery(document).ready(function($){
                 setTimeout(function(){
                     removeLoader(button)
                 },1000)
-                $(form).siblings('.error-form').html(res?.data?.message)
+                $(form).siblings('.error-form').html(err?.responseJSON?.data?.message)
+                $(form).siblings('.error-form').show();
             }
         })
     });
